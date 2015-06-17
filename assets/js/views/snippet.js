@@ -20,7 +20,7 @@ define([
 ){
   return Backbone.View.extend({
     tagName: "div"
-    , className: "component" 
+    , className: "component row" 
     , initialize: function(){
       this.template = _.template(_snippetTemplates[this.model.idFriendlyTitle()])
       this.popoverTemplates = {
