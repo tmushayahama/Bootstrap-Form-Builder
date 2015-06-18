@@ -112,21 +112,28 @@ define([
 		, determinePosition: function($component, mouseEvent) {
 			var thisModel = this;
 
-			//console.log("I am on - ", $component.attr("class"));
 
+			//var $mouseOverComponent = $(mouseEvent.target);
+			//console.log("I am on - ", $mouseOverComponent.attr("class"));
 
-			if ($component.hasClass("component-row") && $component.find(".component").length === 0) {
+			//if ($component.find(".component").length === 0) {
+				//case when there are no form elements, i.e. only the label name
+			//	thisModel.createTargetBox($component, 0).insertAfter($component);
+				//	thisModel.rearrangeComponentRow($parent);
+			if (mouseEvent.pageY >= $component.offset().top + $component.height() - 20) {
 				//case when there are no form elements, i.e. only the label name
 				thisModel.createTargetBox($component, 0).insertAfter($component);
 				//	thisModel.rearrangeComponentRow($parent);
 			} else {
 				var $parent = $component;
-
+				
 				var childrenCount = $parent.length;
-				console.log("Sons and Daughters", childrenCount)
+				//console.log("Sons and Daughters", childrenCount)
 				$parent.find(".component").each(function() {
 					var $child = $(this);
 					//when the cursor is inside the component tot he left
+
+					console.log("Mouse", mouseEvent.pageY, "Child", $child.offset())
 					if (mouseEvent.pageX >= $child.offset().left &&
 							mouseEvent.pageX < (($child.width() / 2) + $child.offset().left)) {
 						thisModel.createTargetBox($component, childrenCount).insertBefore($child);
@@ -138,7 +145,7 @@ define([
 						thisModel.createTargetBox($component, childrenCount).insertAfter($child);
 						thisModel.rearrangeComponentRow($parent);
 						return false;
-					} else if (mouseEvent.pageY >= $child.offset().bottom) {
+					} else if (mouseEvent.pageY >= $child.offset().top + $child.height() + 100) {
 						thisModel.createTargetBox($component, 0).insertAfter($component);
 						//thisModel.rearrangeComponentRow($parent);
 						return false;

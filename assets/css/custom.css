@@ -21,14 +21,19 @@ body {
 	padding-bottom: 30px;
 }
 .component-row {
-	padding: 10px 0px;
+	padding: 0 0 20px 0px;
 }
 
 .component {
 	position: relative;
-	margin: 0px;
-	padding: 0;
 	cursor: pointer;
+	background-color: greenyellow;
+}
+
+.component-row > .component {
+	margin: 0px;
+	padding: 0px;
+	background-color: #4cae4c;
 }
 
 input {
