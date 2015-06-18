@@ -117,37 +117,33 @@ define([
 			//console.log("I am on - ", $mouseOverComponent.attr("class"));
 
 			//if ($component.find(".component").length === 0) {
-				//case when there are no form elements, i.e. only the label name
+			//case when there are no form elements, i.e. only the label name
 			//	thisModel.createTargetBox($component, 0).insertAfter($component);
-				//	thisModel.rearrangeComponentRow($parent);
+			//	thisModel.rearrangeComponentRow($parent);
 			if (mouseEvent.pageY >= $component.offset().top + $component.height() - 20) {
 				//case when there are no form elements, i.e. only the label name
 				thisModel.createTargetBox($component, 0).insertAfter($component);
 				//	thisModel.rearrangeComponentRow($parent);
 			} else {
 				var $parent = $component;
-				
+
 				var childrenCount = $parent.length;
 				//console.log("Sons and Daughters", childrenCount)
 				$parent.find(".component").each(function() {
 					var $child = $(this);
 					//when the cursor is inside the component tot he left
 
-					console.log("Mouse", mouseEvent.pageY, "Child", $child.offset())
-					if (mouseEvent.pageX >= $child.offset().left &&
-							mouseEvent.pageX < (($child.width() / 2) + $child.offset().left)) {
+					//console.log("Mouse", mouseEvent.pageY, "Child", $child.offset())
+					if (mouseEvent.pageX >= $component.offset().left &&
+							mouseEvent.pageX < (($component.width() / (childrenCount + 1)) + $component.offset().left)) {
 						thisModel.createTargetBox($component, childrenCount).insertBefore($child);
 						thisModel.rearrangeComponentRow($parent);
 						return false;
 						//when the cursor is inside the component tot he right
-					} else if (mouseEvent.pageX >= (($child.width() / 2) + $child.offset().left) &&
-							mouseEvent.pageX < (($child.width()) + $child.offset().left)) {
+					} else if (mouseEvent.pageX >= (($component.width() / (childrenCount + 1)) + $component.offset().left) &&
+							mouseEvent.pageX < (($component.width()) + $component.offset().left)) {
 						thisModel.createTargetBox($component, childrenCount).insertAfter($child);
 						thisModel.rearrangeComponentRow($parent);
-						return false;
-					} else if (mouseEvent.pageY >= $child.offset().top + $child.height() + 100) {
-						thisModel.createTargetBox($component, 0).insertAfter($component);
-						//thisModel.rearrangeComponentRow($parent);
 						return false;
 					}
 				});
