@@ -1,6 +1,6 @@
 <!-- Text input-->
 
-<div class="col-lg-6 col-md-6 form-group<% if(required) {%> required-control<% } %>">
+<div class="component col-lg-12 col-md-12 form-group<% if(required) {%> required-control<% } %>">
 	<label class="col-lg-4 col-md-4 control-label" for="<%= id %>"><%= label %></label>
 	<div class="col-lg-8 <%= inputsize %>">
 		<input id="<%= id %>" name="<%= id %>" type="text" placeholder="<%= placeholder %>" class="form-control <%= inputheight %>" <% if(required) {%> required <% } %> />

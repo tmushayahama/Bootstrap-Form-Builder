@@ -24,18 +24,29 @@ define([
 		}
 
 		, TargetClass: function() {
-			this.className = 'target';
+			this.className = null;
 			this.height = 0;
 		}
 
 		, removeTargetClasses: function($target) {
 			/*
+			 $target.removeClass(function(index, css) {
+			 return (css.match(/(^|\s)target-\S+/g) || []).join(' ');
+			 });
+			 $target.removeClass("target");
+			 */
+			$(".target").remove();
+		}
+
+		, addElement: function($target) {
+			$target.replace();
+
 			$target.removeClass(function(index, css) {
 				return (css.match(/(^|\s)target-\S+/g) || []).join(' ');
 			});
 			$target.removeClass("target");
-			*/
-		   $(".target").remove();
+
+			$(".target").remove();
 		}
 
 		, render: function() {
@@ -55,9 +66,9 @@ define([
 		}
 
 		, getBottomAbove: function(eventY) {
-			var myFormBits = $(this.$el.find(".component"));
+			var myFormBits = $(this.$el.find(".component-row"));
 			var topelement = _.find(myFormBits, function(renderedSnippet) {
-				if (($(renderedSnippet).offset().top + $(renderedSnippet).height()) > eventY - 90) {
+				if (($(renderedSnippet).position().top + $(renderedSnippet).height()) > eventY - 90) {
 					return true;
 				}
 				else {
@@ -70,31 +81,54 @@ define([
 				return myFormBits[0];
 			}
 		}
+		
+		, rearrangeComponentRow: function($row) {
+			$row.find(".component").each(function() {
+				var $child = $(this);
+				$child.removeClass("col-lg-12");
+				$child.addClass("col-lg-6");
+			});
+		}
 
 		, determinePosition: function($component, mouseEvent) {
+			var thisModel = this;
 			var targetClass = new this.TargetClass();
-			if (($component).hasClass("row")) {
-				targetClass.className = "target target-down";
+
+			//case when there are no form elements, i.e. only the label name
+			if ($component.hasClass("component-row") && $component.find(".component").length === 0) {
+				targetClass.className = "target row";
 				targetClass.height = $component.height();
-				return targetClass;
+				if (targetClass !== null) {
+					$component.parent().append($("<div />")
+							.addClass(targetClass.className)
+							.height(targetClass.height));
+				}
 			} else {
-				var $parent = $component.closest("row");
-				console.log("Parent", $parent);
-				var childrenCount = $parent.length();
-				$parent.each(function() {
+				var $parent = $component.closest(".component-row");
+
+				var childrenCount = $parent.length;
+				$parent.find(".component").each(function() {
 					var $child = $(this);
+					//console.log("Child", $child.offset());
 					if (mouseEvent.pageX >= $child.offset().left &&
-							mouseEvent.pageX < ((this.$child.width() / 2) + this.$build.offset().left)) {
-						targetClass.className = "col-1g-6 target";
-						targetClass.height = $component.height();
-						return targetClass;
-					} else if (mouseEvent.pageX >= ((this.$child.width() / 2) + this.$build.offset().left) &&
-							mouseEvent.pageX < ((this.$child.width()) + this.$build.offset().left)) {
-						targetClass.className = "col-1g-6 target";
-						targetClass.height = $component.height();
-						return targetClass;
+							mouseEvent.pageX < (($child.width() / 2) + $child.offset().left)) {
+						targetClass.className = "target col-lg-6";
+						targetClass.height = $child.height();
+						$parent.prepend($("<div />")
+								.addClass(targetClass.className)
+								.height(targetClass.height));
+						thisModel.rearrangeComponentRow($parent);
+						return false;
+					} else if (mouseEvent.pageX >= (($child.width() / 2) + $child.offset().left) &&
+							mouseEvent.pageX < (($child.width()) + $child.offset().left)) {
+						//targetClass.className = "target target-right";
+						//targetClass.height = $component.height();
+						return false;
 					}
 				});
+
+
+				return targetClass;
 			}
 			return null;
 		}
@@ -113,13 +147,8 @@ define([
 					mouseEvent.pageY >= this.$build.offset().top &&
 					mouseEvent.pageY < (this.$build.height() + this.$build.offset().top)) {
 				var $parent = $(this.getBottomAbove(mouseEvent.pageY));
-				var targetClass = this.determinePosition($parent, mouseEvent);
-				if (targetClass !== null) {
-					//$parent.addClass(targetClass.className);
-					$parent.append($("<div />").addClass(targetClass.className));
-					console.log($parent.html())
-					//console.log("targetClass", targetClass);
-				}
+				this.determinePosition($parent, mouseEvent);
+
 			} else {
 				this.removeTargetClasses($(".target"));
 				//$(".target").removeClass("target");
@@ -132,6 +161,7 @@ define([
 					mouseEvent.pageY >= this.$build.offset().top &&
 					mouseEvent.pageY < (this.$build.height() + this.$build.offset().top)) {
 				var index = $(".target").index();
+				//this.rearrangeElement();
 				this.removeTargetClasses($(".target"));
 				//$(".target").removeClass("target");
 				this.collection.add(model, {at: index + 1});
