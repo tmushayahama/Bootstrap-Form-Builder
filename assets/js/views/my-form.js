@@ -68,7 +68,7 @@ define([
 		, getBottomAbove: function(eventY) {
 			var myFormBits = $(this.$el.find(".component-row"));
 			var topelement = _.find(myFormBits, function(renderedSnippet) {
-				if (($(renderedSnippet).position().top + $(renderedSnippet).height()) > eventY - 90) {
+				if (($(renderedSnippet).offset().top + $(renderedSnippet).height()) > eventY) {
 					return true;
 				}
 				else {
@@ -81,56 +81,70 @@ define([
 				return myFormBits[0];
 			}
 		}
-		
+
 		, rearrangeComponentRow: function($row) {
 			$row.find(".component").each(function() {
 				var $child = $(this);
 				$child.removeClass("col-lg-12");
+				$child.removeClass(function(index, css) {
+					return (css.match(/(^|\s)col-\S+/g) || []).join(' ');
+				});
 				$child.addClass("col-lg-6");
 			});
+		}
+		, createTargetBox: function($component, children) {
+			var targetClass = new this.TargetClass();
+			targetClass.height = $component.height();
+
+			switch (children) {
+				case 0:
+					targetClass.className = "target row";
+					break;
+				case 1:
+					targetClass.className = "target col-lg-6";
+					break;
+			}
+			return $("<div />")
+					.addClass(targetClass.className)
+					.height(targetClass.height);
 		}
 
 		, determinePosition: function($component, mouseEvent) {
 			var thisModel = this;
-			var targetClass = new this.TargetClass();
 
-			//case when there are no form elements, i.e. only the label name
+			//console.log("I am on - ", $component.attr("class"));
+
+
 			if ($component.hasClass("component-row") && $component.find(".component").length === 0) {
-				targetClass.className = "target row";
-				targetClass.height = $component.height();
-				if (targetClass !== null) {
-					$component.parent().append($("<div />")
-							.addClass(targetClass.className)
-							.height(targetClass.height));
-				}
+				//case when there are no form elements, i.e. only the label name
+				thisModel.createTargetBox($component, 0).insertAfter($component);
+				//	thisModel.rearrangeComponentRow($parent);
 			} else {
-				var $parent = $component.closest(".component-row");
+				var $parent = $component;
 
 				var childrenCount = $parent.length;
+				console.log("Sons and Daughters", childrenCount)
 				$parent.find(".component").each(function() {
 					var $child = $(this);
-					//console.log("Child", $child.offset());
+					//when the cursor is inside the component tot he left
 					if (mouseEvent.pageX >= $child.offset().left &&
 							mouseEvent.pageX < (($child.width() / 2) + $child.offset().left)) {
-						targetClass.className = "target col-lg-6";
-						targetClass.height = $child.height();
-						$parent.prepend($("<div />")
-								.addClass(targetClass.className)
-								.height(targetClass.height));
+						thisModel.createTargetBox($component, childrenCount).insertBefore($child);
 						thisModel.rearrangeComponentRow($parent);
 						return false;
+						//when the cursor is inside the component tot he right
 					} else if (mouseEvent.pageX >= (($child.width() / 2) + $child.offset().left) &&
 							mouseEvent.pageX < (($child.width()) + $child.offset().left)) {
-						//targetClass.className = "target target-right";
-						//targetClass.height = $component.height();
+						thisModel.createTargetBox($component, childrenCount).insertAfter($child);
+						thisModel.rearrangeComponentRow($parent);
+						return false;
+					} else if (mouseEvent.pageY >= $child.offset().bottom) {
+						thisModel.createTargetBox($component, 0).insertAfter($component);
+						//thisModel.rearrangeComponentRow($parent);
 						return false;
 					}
 				});
-
-
-				return targetClass;
 			}
-			return null;
 		}
 
 		, handleSnippetDrag: function(mouseEvent, snippetModel) {
@@ -148,7 +162,6 @@ define([
 					mouseEvent.pageY < (this.$build.height() + this.$build.offset().top)) {
 				var $parent = $(this.getBottomAbove(mouseEvent.pageY));
 				this.determinePosition($parent, mouseEvent);
-
 			} else {
 				this.removeTargetClasses($(".target"));
 				//$(".target").removeClass("target");

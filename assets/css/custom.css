@@ -26,6 +26,8 @@ body {
 
 .component {
 	position: relative;
+	margin: 0px;
+	padding: 0;
 	cursor: pointer;
 }
 
@@ -56,7 +58,8 @@ textarea {
 }
 
 .temp form {
-	padding: 8px 4px;
+	width: 300px;
+	padding: 8px 0px;
 	border: 1px dotted #ccc;
 	position: absolute;
 	background: white;
