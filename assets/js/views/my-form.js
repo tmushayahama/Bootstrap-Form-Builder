@@ -12,7 +12,7 @@ define([
 	return Backbone.View.extend({
 		tagName: "fieldset"
 		, initialize: function() {
-			this.collection.on("add", this.render, this);
+			this.collection.on("add", this.addComponent, this);
 			this.collection.on("remove", this.render, this);
 			this.collection.on("change", this.render, this);
 			PubSub.on("mySnippetDrag", this.handleSnippetDrag, this);
@@ -65,6 +65,36 @@ define([
 			this.delegateEvents();
 		}
 
+		, addComponent: function() {
+			//Render Snippet Views
+			this.$el.empty();
+			var that = this;
+			_.each(this.collection.renderAll(), function(snippet) {
+				that.$el.append(snippet);
+			});
+			$("#render").val(that.renderForm({
+				text: _.map(this.collection.renderAllClean(), function(e) {
+					return e.html();
+				}).join("\n")
+			}));
+
+
+			var $set = this.$el.children();
+			var i = 1;//ignore the form header
+			//console.log("---------------", $set.length)
+			while (i < $set.length) {
+				if ($($set[i]).hasClass("col-lg-6")) {
+					$set.slice(i, i + 2).wrapAll('<div class="row component-row"/>');
+					i += 2;
+				} else {
+					$set.slice(i, i + 1).wrapAll('<div class="row component-row"/>');
+					i += 1;
+				}
+			}
+			this.$el.appendTo("#build form");
+			this.delegateEvents();
+		}
+
 		, getBottomAbove: function(eventY) {
 			var myFormBits = $(this.$el.find(".component-row"));
 			var topelement = _.find(myFormBits, function(renderedSnippet) {
@@ -78,30 +108,60 @@ define([
 			if (topelement) {
 				return topelement;
 			} else {
-				return myFormBits[0];
+				return this.$el.children()[0];
 			}
 		}
 
 		, rearrangeComponentRow: function($row) {
-			$row.find(".component").each(function() {
-				var $child = $(this);
-				$child.removeClass("col-lg-12");
-				$child.removeClass(function(index, css) {
-					return (css.match(/(^|\s)col-\S+/g) || []).join(' ');
-				});
-				$child.addClass("col-lg-6");
+			//this.prettifyComponentRows();
+			/*
+			 $row.find(".component").each(function() {
+			 var $child = $(this);
+			 $child.removeClass("col-lg-12");
+			 $child.removeClass(function(index, css) {
+			 return (css.match(/(^|\s)col-\S+/g) || []).join(' ');
+			 });
+			 $child.addClass("col-lg-6");
+			 });
+			 */
+		}
+
+		, prettifyComponentRows: function() {
+			$("#build form .component-row").each(function() {
+				var $children = $(this).find(".component");
+				switch ($children.length) {
+					case 1:
+						$children.each(function() {
+							var $child = $(this);
+							$child.removeClass(function(index, css) {
+								return (css.match(/(^|\s)col-\S+/g) || []).join(' ');
+							});
+							$child.addClass("col-lg-12");
+						});
+						break;
+					case 2:
+						$children.each(function() {
+							var $child = $(this);
+							$child.removeClass(function(index, css) {
+								return (css.match(/(^|\s)col-\S+/g) || []).join(' ');
+							});
+							$child.addClass("col-lg-6");
+						});
+						break;
+				}
 			});
 		}
+
 		, createTargetBox: function($component, children) {
 			var targetClass = new this.TargetClass();
 			targetClass.height = $component.height();
 
 			switch (children) {
 				case 0:
-					targetClass.className = "target row";
+					targetClass.className = "target component col-lg-12";
 					break;
 				case 1:
-					targetClass.className = "target col-lg-6";
+					targetClass.className = "target component col-lg-6";
 					break;
 			}
 			return $("<div />")
@@ -176,11 +236,18 @@ define([
 					mouseEvent.pageX < (this.$build.width() + this.$build.offset().left) &&
 					mouseEvent.pageY >= this.$build.offset().top &&
 					mouseEvent.pageY < (this.$build.height() + this.$build.offset().top)) {
-				var index = $(".target").index();
+				var targetBox = $(".target");
+				targetBox.removeClass("target");
+				var index = targetBox.index();
 				//this.rearrangeElement();
-				this.removeTargetClasses($(".target"));
+
 				//$(".target").removeClass("target");
+				model.set("className", targetBox.attr("class"));
+				//this.removeTargetClasses($(".target"));
+
+				targetBox.remove();
 				this.collection.add(model, {at: index + 1});
+				//console.log("model", model);
 			} else {
 				this.removeTargetClasses($(".target"));
 				//$(".target").removeClass("target");

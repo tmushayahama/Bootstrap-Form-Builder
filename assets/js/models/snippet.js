@@ -2,7 +2,8 @@ define([
       'jquery', 'underscore', 'backbone'
 ], function($, _, Backbone) {
   return Backbone.Model.extend({
-    getValues: function(){
+	  className: "component"
+    , getValues: function(){
       return _.reduce(this.get("fields"), function(o, v, k){
         if (v["type"] == "select") {
           o[k] = _.find(v["value"], function(o){return o.selected})["value"];

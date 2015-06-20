@@ -11,7 +11,7 @@ define([
     model: SnippetModel
     , renderAll: function(){
       return this.map(function(snippet){
-        return new TabSnippetView({model: snippet}).render();
+		 return new TabSnippetView({model: snippet}).render();
       });
     }
   });
