@@ -1,4 +1,5 @@
 body {
+	background-color: #ff0;
 	padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
 	padding-bottom: 10px;
 	position: relative;
@@ -8,6 +9,26 @@ body {
 	body {
 		padding-top: 0px;
 	}
+}
+.fb-desktop-template { 	
+	position: relative;
+	padding: 35px 35px 200px 35px;
+}
+
+.fb-desktop-template img {
+	position:absolute;
+	width: 100%;
+    left:0;
+	right: 0;
+    top:0;
+	bottom: 0;
+}
+
+.fb-desktop-template .fb-template-inner {
+	padding: 20px;
+	height: 420px;
+	border: blueviolet solid 1px;
+	background-color: cyan;
 }
 
 #components {
