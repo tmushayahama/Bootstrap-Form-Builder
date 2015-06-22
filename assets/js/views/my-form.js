@@ -91,6 +91,7 @@ define([
 					i += 1;
 				}
 			}
+			this.prettifyComponentRows();
 			this.$el.appendTo("#build form");
 			this.delegateEvents();
 		}
@@ -129,6 +130,7 @@ define([
 		, prettifyComponentRows: function() {
 			$("#build form .component-row").each(function() {
 				var $children = $(this).find(".component");
+				console.log("Moo", $children.length);
 				switch ($children.length) {
 					case 1:
 						$children.each(function() {
@@ -160,7 +162,7 @@ define([
 				case 0:
 					targetClass.className = "target component col-lg-12";
 					break;
-				case 1:
+				case 1: 					
 					targetClass.className = "target component col-lg-6";
 					break;
 			}
@@ -225,8 +227,10 @@ define([
 					mouseEvent.pageY < (this.$build.height() + this.$build.offset().top)) {
 				var $parent = $(this.getBottomAbove(mouseEvent.pageY));
 				this.determinePosition($parent, mouseEvent);
+				this.prettifyComponentRows();
 			} else {
 				this.removeTargetClasses($(".target"));
+				this.prettifyComponentRows();
 				//$(".target").removeClass("target");
 			}
 		}
