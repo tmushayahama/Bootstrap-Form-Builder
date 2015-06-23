@@ -1,7 +1,7 @@
 <!-- Multiple Checkboxes (inline) -->
 <div class="form-group">
-  <label class="col-md-3 control-label" for="<%= name %>"><%= label %></label>
-  <div class="col-lg-8"><% _.each(checkboxes, function(checkbox, i){ %>
+  <label class="col-lg-4 col-md-4 control-label" for="<%= name %>"><%= label %></label>
+  <div class="col-lg-8 col-md-8"><% _.each(checkboxes, function(checkbox, i){ %>
     <label class="checkbox-inline" for="<%= name+'-'+i %>">
       <input type="checkbox" name="<%= name %>" id="<%= name+'-'+i %>" value="<%= checkbox %>">
       <%= checkbox %>

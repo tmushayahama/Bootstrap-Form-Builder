@@ -85,8 +85,8 @@ define([
 					i += 1;
 				}
 			}
-			this.prettifyComponentRows();
 			this.$el.appendTo("#build form");
+			this.prettifyComponentRows();
 			this.delegateEvents();
 		}
 
@@ -106,7 +106,7 @@ define([
 			var $set = this.$el.children();
 			var i = 0;
 			console.log("---------------", $set.length);
-			
+
 			while (i < $set.length) {
 				console.log("class", ($($set[i]).attr("class")))
 				i++;
@@ -120,9 +120,9 @@ define([
 					$set.slice(i, i + 1).wrapAll('<div class="row component-row"/>');
 					i += 1;
 				}
-			}			
+			}
 			this.$el.appendTo("#build form");
-			this.prettifyComponentRows();
+			//this.prettifyComponentRows();
 			this.delegateEvents();
 		}
 
@@ -160,7 +160,19 @@ define([
 			 */
 		}
 
+		, prettifyCollection: function() {
+			var thisModel = this;
+			var i = 0;
+			$("#build form .component").each(function() {
+				var $child = $(this);
+				console.log("Coo", $child);
+				thisModel.collection.models[i++].set("className", $child.attr("class"));
+			});
+		}
+
 		, prettifyComponentRows: function() {
+			var thisModel = this;
+			var i = 0;
 			$("#build form .component-row").each(function() {
 				var $children = $(this).find(".component");
 				console.log("Mooooooo", $children.length);
@@ -206,39 +218,24 @@ define([
 
 		, determinePosition: function($component, mouseEvent) {
 			var thisModel = this;
-
-
-			//var $mouseOverComponent = $(mouseEvent.target);
-			//console.log("I am on - ", $mouseOverComponent.attr("class"));
-
-			//if ($component.find(".component").length === 0) {
-			//case when there are no form elements, i.e. only the label name
-			//	thisModel.createTargetBox($component, 0).insertAfter($component);
-			//	thisModel.rearrangeComponentRow($parent);
 			if (mouseEvent.pageY >= $component.offset().top + $component.height() - 20) {
 				//case when there are no form elements, i.e. only the label name
 				thisModel.createTargetBox($component, 0).insertAfter($component);
-				//	thisModel.rearrangeComponentRow($parent);
 			} else {
-				var $parent = $component;
-
-				var childrenCount = $parent.length;
-				//console.log("Sons and Daughters", childrenCount)
-				$parent.find(".component").each(function() {
+				var childrenCount = $component.length;
+				$component.find(".component").each(function() {
 					var $child = $(this);
-					//when the cursor is inside the component tot he left
+					//when the cursor is inside the component to the left
 
 					//console.log("Mouse", mouseEvent.pageY, "Child", $child.offset())
 					if (mouseEvent.pageX >= $component.offset().left &&
 							mouseEvent.pageX < (($component.width() / (childrenCount + 1)) + $component.offset().left)) {
 						thisModel.createTargetBox($component, childrenCount).insertBefore($child);
-						thisModel.rearrangeComponentRow($parent);
 						return false;
 						//when the cursor is inside the component tot he right
 					} else if (mouseEvent.pageX >= (($component.width() / (childrenCount + 1)) + $component.offset().left) &&
 							mouseEvent.pageX < (($component.width()) + $component.offset().left)) {
 						thisModel.createTargetBox($component, childrenCount).insertAfter($child);
-						thisModel.rearrangeComponentRow($parent);
 						return false;
 					}
 				});
@@ -288,6 +285,13 @@ define([
 
 				targetBox.remove();
 				this.collection.add(model, {at: index});
+				this.prettifyComponentRows();
+				this.prettifyCollection();
+
+				for (var i = 0; i < this.collection.models.length; i++) {
+					console.log('log item.', this.collection.models[i]);
+				}
+
 				//console.log("model", model);
 			} else {
 				this.removeTargetClasses($(".target"));
