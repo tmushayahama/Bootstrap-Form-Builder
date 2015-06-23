@@ -111,7 +111,10 @@ define([
 			}
 			i = 0;
 			while (i < $set.length) {
-				if ($($set[i]).hasClass("col-lg-6")) {
+				if ($($set[i]).hasClass("col-lg-4")) {
+					$set.slice(i, i + 3).wrapAll('<div class="row component-row"/>');
+					i += 3;
+				} else if ($($set[i]).hasClass("col-lg-6")) {
 					$set.slice(i, i + 2).wrapAll('<div class="row component-row"/>');
 					i += 2;
 				} else {
@@ -156,6 +159,15 @@ define([
 							$child.addClass("col-lg-6");
 						});
 						break;
+					case 3:
+						$children.each(function() {
+							var $child = $(this);
+							$child.removeClass(function(index, css) {
+								return (css.match(/(^|\s)col-\S+/g) || []).join(' ');
+							});
+							$child.addClass("col-lg-4");
+						});
+						break;
 				}
 			});
 		}
@@ -167,14 +179,29 @@ define([
 			switch (children) {
 				case 0:
 					targetRoom.className = "target component col-lg-12";
+					targetRoom.heigh = "10px";
 					break;
 				case 1:
 					targetRoom.className = "target component col-lg-6";
+					break;
+				case 2:
+					targetRoom.className = "target component col-lg-4";
 					break;
 			}
 			return $("<div />")
 					.addClass(targetRoom.className)
 					.height(targetRoom.height);
+		}
+		, getRoomNumber: function($component, childrenCount, pageX) {
+			var roomWidth = $component.width() / (childrenCount + 1);
+			var houseLeftPosition = $component.offset().left;
+			for (var n = 0; n < childrenCount; n++) {
+				if (pageX >= houseLeftPosition + (roomWidth * n) &&
+						pageX < houseLeftPosition + (roomWidth * (n + 1))) {
+					return n;
+				}
+			}
+			return -1;
 		}
 
 		, makeRoom: function($component, mouseEvent) {
@@ -184,20 +211,17 @@ define([
 				thisModel.createTargetRoom($component, 0).insertAfter($component);
 			} else {
 				var childrenCount = $component.length;
-				$component.find(".component").each(function() {
-					var $child = $(this);
-					//when the cursor is inside the component to the left
-					if (mouseEvent.pageX >= $component.offset().left &&
-							mouseEvent.pageX < (($component.width() / (childrenCount + 1)) + $component.offset().left)) {
-						thisModel.createTargetRoom($component, childrenCount).insertBefore($child);
-						return false;
-						//when the cursor is inside the component tot he right
-					} else if (mouseEvent.pageX >= (($component.width() / (childrenCount + 1)) + $component.offset().left) &&
-							mouseEvent.pageX < (($component.width()) + $component.offset().left)) {
-						thisModel.createTargetRoom($component, childrenCount).insertAfter($child);
-						return false;
-					}
-				});
+
+				var roomNumber = thisModel.getRoomNumber($component, childrenCount, mouseEvent.pageX);
+
+				var $room = $component.children().eq(roomNumber);
+
+				if (roomNumber === 0) {
+					thisModel.createTargetRoom($component, childrenCount).insertBefore($room);
+				} else {
+					thisModel.createTargetRoom($component, childrenCount).insertAfter($room);
+				}
+				return false;
 			}
 		}
 
