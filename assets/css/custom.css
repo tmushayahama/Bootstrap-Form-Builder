@@ -5,6 +5,11 @@ body {
 	position: relative;
 }
 
+/*------OVERRIDES------*/
+.form-group {
+	margin: 0;
+}
+
 @media (max-width: 979px) {
 	body {
 		padding-top: 0px;

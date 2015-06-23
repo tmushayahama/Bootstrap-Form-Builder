@@ -28,6 +28,17 @@ define([
 			this.height = 0;
 		}
 
+		, targetClassIndex: function() {
+			var target = $(".target");
+			var targetParent = target.parent();
+			console.log(targetParent.attr("class"));
+			if (targetParent.hasClass("component-row")) {
+				return targetParent.index();
+			} else {
+				return target.index();
+			}
+		}
+
 		, removeTargetClasses: function($target) {
 			/*
 			 $target.removeClass(function(index, css) {
@@ -61,6 +72,20 @@ define([
 					return e.html()
 				}).join("\n")
 			}));
+
+			var $set = this.$el.children();
+			var i = 0;
+			console.log("----+++++", $set.length)
+			while (i < $set.length) {
+				if ($($set[i]).hasClass("col-lg-6")) {
+					$set.slice(i, i + 2).wrapAll('<div class="row component-row"/>');
+					i += 2;
+				} else {
+					$set.slice(i, i + 1).wrapAll('<div class="row component-row"/>');
+					i += 1;
+				}
+			}
+			this.prettifyComponentRows();
 			this.$el.appendTo("#build form");
 			this.delegateEvents();
 		}
@@ -78,10 +103,15 @@ define([
 				}).join("\n")
 			}));
 
-
 			var $set = this.$el.children();
-			var i = 1;//ignore the form header
-			//console.log("---------------", $set.length)
+			var i = 0;
+			console.log("---------------", $set.length);
+			
+			while (i < $set.length) {
+				console.log("class", ($($set[i]).attr("class")))
+				i++;
+			}
+			i = 0;
 			while (i < $set.length) {
 				if ($($set[i]).hasClass("col-lg-6")) {
 					$set.slice(i, i + 2).wrapAll('<div class="row component-row"/>');
@@ -90,9 +120,9 @@ define([
 					$set.slice(i, i + 1).wrapAll('<div class="row component-row"/>');
 					i += 1;
 				}
-			}
-			this.prettifyComponentRows();
+			}			
 			this.$el.appendTo("#build form");
+			this.prettifyComponentRows();
 			this.delegateEvents();
 		}
 
@@ -100,16 +130,19 @@ define([
 			var myFormBits = $(this.$el.find(".component-row"));
 			var topelement = _.find(myFormBits, function(renderedSnippet) {
 				if (($(renderedSnippet).offset().top + $(renderedSnippet).height()) > eventY) {
+					//console.log("Top", $(renderedSnippet).offset().top, " ", $(renderedSnippet).offset().top + $(renderedSnippet).height(), " Mouse ", eventY)
 					return true;
 				}
 				else {
+					//console.log("Top", $(renderedSnippet).offset().top, " ", $(renderedSnippet).offset().top + $(renderedSnippet).height(), " Mouse ", eventY)
 					return false;
 				}
 			});
+
 			if (topelement) {
 				return topelement;
 			} else {
-				return this.$el.children()[0];
+				return this.$el.children()[this.$el.children().length - 1];
 			}
 		}
 
@@ -130,7 +163,7 @@ define([
 		, prettifyComponentRows: function() {
 			$("#build form .component-row").each(function() {
 				var $children = $(this).find(".component");
-				console.log("Moo", $children.length);
+				console.log("Mooooooo", $children.length);
 				switch ($children.length) {
 					case 1:
 						$children.each(function() {
@@ -162,7 +195,7 @@ define([
 				case 0:
 					targetClass.className = "target component col-lg-12";
 					break;
-				case 1: 					
+				case 1:
 					targetClass.className = "target component col-lg-6";
 					break;
 			}
@@ -228,6 +261,7 @@ define([
 				var $parent = $(this.getBottomAbove(mouseEvent.pageY));
 				this.determinePosition($parent, mouseEvent);
 				this.prettifyComponentRows();
+				console.log("Tag Index", $(".target").index())
 			} else {
 				this.removeTargetClasses($(".target"));
 				this.prettifyComponentRows();
@@ -241,16 +275,19 @@ define([
 					mouseEvent.pageY >= this.$build.offset().top &&
 					mouseEvent.pageY < (this.$build.height() + this.$build.offset().top)) {
 				var targetBox = $(".target");
+
+				var index = this.targetClassIndex();
+				console.log("Index", index);
 				targetBox.removeClass("target");
-				var index = targetBox.index();
 				//this.rearrangeElement();
 
 				//$(".target").removeClass("target");
 				model.set("className", targetBox.attr("class"));
+				console.log("ModelClass", model.get("className"));
 				//this.removeTargetClasses($(".target"));
 
 				targetBox.remove();
-				this.collection.add(model, {at: index + 1});
+				this.collection.add(model, {at: index});
 				//console.log("model", model);
 			} else {
 				this.removeTargetClasses($(".target"));
