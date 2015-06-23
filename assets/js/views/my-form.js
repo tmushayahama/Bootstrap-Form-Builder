@@ -28,35 +28,18 @@ define([
 			this.height = 0;
 		}
 
-		, targetClassIndex: function() {
+		, targetRoomIndex: function() {
 			var target = $(".target");
 			var targetParent = target.parent();
 			console.log(targetParent.attr("class"));
 			if (targetParent.hasClass("component-row")) {
-				return targetParent.index();
+				return targetParent.index() + target.index();
 			} else {
 				return target.index();
 			}
 		}
 
 		, removeTargetClasses: function($target) {
-			/*
-			 $target.removeClass(function(index, css) {
-			 return (css.match(/(^|\s)target-\S+/g) || []).join(' ');
-			 });
-			 $target.removeClass("target");
-			 */
-			$(".target").remove();
-		}
-
-		, addElement: function($target) {
-			$target.replace();
-
-			$target.removeClass(function(index, css) {
-				return (css.match(/(^|\s)target-\S+/g) || []).join(' ');
-			});
-			$target.removeClass("target");
-
 			$(".target").remove();
 		}
 
@@ -73,18 +56,7 @@ define([
 				}).join("\n")
 			}));
 
-			var $set = this.$el.children();
-			var i = 0;
-			console.log("----+++++", $set.length)
-			while (i < $set.length) {
-				if ($($set[i]).hasClass("col-lg-6")) {
-					$set.slice(i, i + 2).wrapAll('<div class="row component-row"/>');
-					i += 2;
-				} else {
-					$set.slice(i, i + 1).wrapAll('<div class="row component-row"/>');
-					i += 1;
-				}
-			}
+			this.wrapRooms();
 			this.$el.appendTo("#build form");
 			this.prettifyComponentRows();
 			this.delegateEvents();
@@ -92,6 +64,7 @@ define([
 
 		, addComponent: function() {
 			//Render Snippet Views
+			this.prettifyCollection();
 			this.$el.empty();
 			var that = this;
 			_.each(this.collection.renderAll(), function(snippet) {
@@ -103,6 +76,31 @@ define([
 				}).join("\n")
 			}));
 
+			this.wrapRooms();
+			this.$el.appendTo("#build form");
+			this.prettifyComponentRows();
+			this.delegateEvents();
+		}
+
+		, getHousePosition: function(eventY) {
+			var myFormBits = $(this.$el.find(".component-row"));
+			var topelement = _.find(myFormBits, function(renderedSnippet) {
+				if (($(renderedSnippet).offset().top + $(renderedSnippet).height()) > eventY) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			});
+
+			if (topelement) {
+				return topelement;
+			} else {
+				return this.$el.children()[this.$el.children().length - 1];
+			}
+		}
+
+		, wrapRooms: function() {
 			var $set = this.$el.children();
 			var i = 0;
 			console.log("---------------", $set.length);
@@ -121,53 +119,16 @@ define([
 					i += 1;
 				}
 			}
-			this.$el.appendTo("#build form");
-			//this.prettifyComponentRows();
-			this.delegateEvents();
-		}
-
-		, getBottomAbove: function(eventY) {
-			var myFormBits = $(this.$el.find(".component-row"));
-			var topelement = _.find(myFormBits, function(renderedSnippet) {
-				if (($(renderedSnippet).offset().top + $(renderedSnippet).height()) > eventY) {
-					//console.log("Top", $(renderedSnippet).offset().top, " ", $(renderedSnippet).offset().top + $(renderedSnippet).height(), " Mouse ", eventY)
-					return true;
-				}
-				else {
-					//console.log("Top", $(renderedSnippet).offset().top, " ", $(renderedSnippet).offset().top + $(renderedSnippet).height(), " Mouse ", eventY)
-					return false;
-				}
-			});
-
-			if (topelement) {
-				return topelement;
-			} else {
-				return this.$el.children()[this.$el.children().length - 1];
-			}
-		}
-
-		, rearrangeComponentRow: function($row) {
-			//this.prettifyComponentRows();
-			/*
-			 $row.find(".component").each(function() {
-			 var $child = $(this);
-			 $child.removeClass("col-lg-12");
-			 $child.removeClass(function(index, css) {
-			 return (css.match(/(^|\s)col-\S+/g) || []).join(' ');
-			 });
-			 $child.addClass("col-lg-6");
-			 });
-			 */
 		}
 
 		, prettifyCollection: function() {
 			var thisModel = this;
-			var i = 0;
-			$("#build form .component").each(function() {
-				var $child = $(this);
+			var $components = $("#build form .component");
+			for (var i = 0; i < $components.length; i++) {
+				var $child = $($components[i]);
 				console.log("Coo", $child);
-				thisModel.collection.models[i++].set("className", $child.attr("class"));
-			});
+				thisModel.collection.models[i].set("className", $child.attr("class"));
+			}
 		}
 
 		, prettifyComponentRows: function() {
@@ -175,7 +136,7 @@ define([
 			var i = 0;
 			$("#build form .component-row").each(function() {
 				var $children = $(this).find(".component");
-				console.log("Mooooooo", $children.length);
+				//console.log("Mooooooo", $children.length);
 				switch ($children.length) {
 					case 1:
 						$children.each(function() {
@@ -199,43 +160,41 @@ define([
 			});
 		}
 
-		, createTargetBox: function($component, children) {
-			var targetClass = new this.TargetClass();
-			targetClass.height = $component.height();
+		, createTargetRoom: function($component, children) {
+			var targetRoom = new this.TargetClass();
+			targetRoom.height = $component.height();
 
 			switch (children) {
 				case 0:
-					targetClass.className = "target component col-lg-12";
+					targetRoom.className = "target component col-lg-12";
 					break;
 				case 1:
-					targetClass.className = "target component col-lg-6";
+					targetRoom.className = "target component col-lg-6";
 					break;
 			}
 			return $("<div />")
-					.addClass(targetClass.className)
-					.height(targetClass.height);
+					.addClass(targetRoom.className)
+					.height(targetRoom.height);
 		}
 
-		, determinePosition: function($component, mouseEvent) {
+		, makeRoom: function($component, mouseEvent) {
 			var thisModel = this;
 			if (mouseEvent.pageY >= $component.offset().top + $component.height() - 20) {
 				//case when there are no form elements, i.e. only the label name
-				thisModel.createTargetBox($component, 0).insertAfter($component);
+				thisModel.createTargetRoom($component, 0).insertAfter($component);
 			} else {
 				var childrenCount = $component.length;
 				$component.find(".component").each(function() {
 					var $child = $(this);
 					//when the cursor is inside the component to the left
-
-					//console.log("Mouse", mouseEvent.pageY, "Child", $child.offset())
 					if (mouseEvent.pageX >= $component.offset().left &&
 							mouseEvent.pageX < (($component.width() / (childrenCount + 1)) + $component.offset().left)) {
-						thisModel.createTargetBox($component, childrenCount).insertBefore($child);
+						thisModel.createTargetRoom($component, childrenCount).insertBefore($child);
 						return false;
 						//when the cursor is inside the component tot he right
 					} else if (mouseEvent.pageX >= (($component.width() / (childrenCount + 1)) + $component.offset().left) &&
 							mouseEvent.pageX < (($component.width()) + $component.offset().left)) {
-						thisModel.createTargetBox($component, childrenCount).insertAfter($child);
+						thisModel.createTargetRoom($component, childrenCount).insertAfter($child);
 						return false;
 					}
 				});
@@ -250,20 +209,16 @@ define([
 
 		, handleTempMove: function(mouseEvent) {
 			this.removeTargetClasses($(".target"));
-			//$(".target").removeClass("target");
 			if (mouseEvent.pageX >= this.$build.offset().left &&
 					mouseEvent.pageX < (this.$build.width() + this.$build.offset().left) &&
 					mouseEvent.pageY >= this.$build.offset().top &&
 					mouseEvent.pageY < (this.$build.height() + this.$build.offset().top)) {
-				var $parent = $(this.getBottomAbove(mouseEvent.pageY));
-				this.determinePosition($parent, mouseEvent);
-				this.prettifyComponentRows();
-				console.log("Tag Index", $(".target").index())
+				var $parent = $(this.getHousePosition(mouseEvent.pageY));
+				this.makeRoom($parent, mouseEvent);
 			} else {
 				this.removeTargetClasses($(".target"));
-				this.prettifyComponentRows();
-				//$(".target").removeClass("target");
 			}
+			this.prettifyComponentRows();
 		}
 
 		, handleTempDrop: function(mouseEvent, model, index) {
@@ -271,32 +226,21 @@ define([
 					mouseEvent.pageX < (this.$build.width() + this.$build.offset().left) &&
 					mouseEvent.pageY >= this.$build.offset().top &&
 					mouseEvent.pageY < (this.$build.height() + this.$build.offset().top)) {
-				var targetBox = $(".target");
 
-				var index = this.targetClassIndex();
+				var index = this.targetRoomIndex();
+				$(".target").removeClass("target");
 				console.log("Index", index);
-				targetBox.removeClass("target");
-				//this.rearrangeElement();
-
-				//$(".target").removeClass("target");
-				model.set("className", targetBox.attr("class"));
-				console.log("ModelClass", model.get("className"));
-				//this.removeTargetClasses($(".target"));
-
-				targetBox.remove();
-				this.collection.add(model, {at: index});
 				this.prettifyComponentRows();
-				this.prettifyCollection();
+				this.collection.add(model, {at: index});
 
 				for (var i = 0; i < this.collection.models.length; i++) {
-					console.log('log item.', this.collection.models[i]);
+					console.log('log item.', this.collection.models[i].get("className"));
 				}
-
-				//console.log("model", model);
+				console.log("ModelClass--", model.get("className"));
 			} else {
 				this.removeTargetClasses($(".target"));
-				//$(".target").removeClass("target");
 			}
+			this.removeTargetClasses($(".target"));
 		}
 	})
 });
