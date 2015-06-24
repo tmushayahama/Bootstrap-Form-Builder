@@ -16,29 +16,66 @@ define([
 
 			//Bootstrap tabs from json.
 			new TabView({
-				title: "Input"
+				title: "Controls"
 				, collection: new SnippetsCollection(JSON.parse(inputJSON))
 			});
 			new TabView({
-				title: "Radios / Checkboxes"
-				, collection: new SnippetsCollection(JSON.parse(radioJSON))
+				title: "Combined Controls"
+				, collection: new SnippetsCollection(JSON.parse(inputJSON))
 			});
-			new TabView({
-				title: "Select"
-				, collection: new SnippetsCollection(JSON.parse(selectJSON))
+			/*
+			 new TabView({
+			 title: "Radios / Checkboxes"
+			 , collection: new SnippetsCollection(JSON.parse(radioJSON))
+			 });
+			 new TabView({
+			 title: "Select"
+			 , collection: new SnippetsCollection(JSON.parse(selectJSON))
+			 });
+			 new TabView({
+			 title: "Buttons"
+			 , collection: new SnippetsCollection(JSON.parse(buttonsJSON))
+			 });
+			 new TabView({
+			 title: "Rendered"
+			 , content: renderTab
+			 });
+			 
+			 new TabView({
+			 title: "About"
+			 , content: aboutTab
+			 });
+			 */
+
+			var trigger = $('.hamburger'),
+					//overlay = $('.overlay'),
+					isClosed = true;
+
+			trigger.click(function() {
+				hamburger_cross();
 			});
-			new TabView({
-				title: "Buttons"
-				, collection: new SnippetsCollection(JSON.parse(buttonsJSON))
+
+			function hamburger_cross() {
+
+				if (isClosed == true) {
+					//overlay.hide();
+					trigger.removeClass('is-open');
+					trigger.addClass('is-closed');
+					isClosed = false;
+				} else {
+					//overlay.show();
+					trigger.removeClass('is-closed');
+					trigger.addClass('is-open');
+					isClosed = true;
+				}
+			}
+
+			$('[data-toggle="offcanvas"]').click(function() {
+				$('#wrapper').toggleClass('toggled');
 			});
-			new TabView({
-				title: "Rendered"
-				, content: renderTab
-			});
-			new TabView({
-				title: "About"
-				, content: aboutTab
-			});
+
+			//Tab form initialization
+			$(".fb-form-snippets .component").wrap("<li />");
 
 			//Make the first tab active!
 			$("#components .tab-pane").first().addClass("active");

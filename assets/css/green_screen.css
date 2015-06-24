@@ -1,0 +1,16 @@
+body {
+	background-color: #ff0;
+}
+
+.fb-desktop-template .fb-template-inner {
+	border: blueviolet solid 1px;
+	background-color: cyan;
+}
+
+.component {
+	background-color: greenyellow;
+}
+
+.component-row > .component {
+	background-color: #4cae4c;
+}

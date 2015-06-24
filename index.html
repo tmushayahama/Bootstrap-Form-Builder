@@ -10,6 +10,9 @@
 		<link href="assets/css/lib/bootstrap-3.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
 		<link id="bootstrap-classic-theme" href="" rel="stylesheet">
 		<link href="assets/css/custom.css?v=2" rel="stylesheet">
+		<!--
+		<link href="assets/css/green_screen.css" rel="stylesheet">
+		-->
 		<!--[if lt IE 9]>
 		<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -20,57 +23,63 @@
 		<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
 	</head>
 
-	<body>
+	<body>		
 		<div class="navbar navbar-default navbar-fixed-top">
-			<div class="container">
+			<div class="container-fluid">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="#">Web Form Builder</a>
+					<a class="navbar-brand" href="#">Your Logo</a>
 				</div>
 			</div>
 		</div>
-		<div class="container">
-			<div class="row"> <!-- Components -->
-				<div class="col-lg-4 col-md-4">
-					<h4>Toolbox</h4>
-					<a href="#" id="toggle_bs_style" class="btn btn-info btn-xs pull-right">Toggle bootstrap theme</a>
-					<div class="clearfix"></div>
-					<hr>
-					<div class="tabbable">
-						<ul class="nav nav-tabs" id="formtabs">
+		<div id="wrapper" class="toggled">
+			<!-- Sidebar -->
+			<nav class="" id="sidebar-wrapper" role="navigation">
+				<div class="nav  tabbable">
+					<div class="row">
+						<div class="fb-tab-heading col-lg-4">
+							Toolbox
+						</div>	
+						<ul class="fb-nav-tabs nav nav-tabs col-lg-8" id="formtabs">
 							<!-- Tab nav -->
 						</ul>
+					</div>
+					<div class="sidebar-nav">
 						<form id="components" class="form-horizontal">
 							<fieldset>
-								<div class="tab-content">
+								<div class="fb-form-snippets tab-content">
 									<!-- Tabs of snippets go here -->
 								</div>
 							</fieldset>
 						</form>
 					</div>
 				</div>
-				<!-- / Components -->
+			</nav>
+			<!-- /#sidebar-wrapper -->
 
-				<!-- Building Form. -->
-				<div class="col-lg-8 col-md-8">
-					<div class="clearfix">
-						<h4>Your Form</h4>
-						<hr>
-						<div class="fb-desktop-template">
-							<!--
-							<img src="assets/img/desktop-template.png" />
-							-->
-							<div id="build" class="fb-template-inner">
-								<form id="target" class="form-horizontal">
-								</form>
-							</div>
+			<!-- Page Content -->
+			<div id="page-content-wrapper">
+				<button type="button" class="hamburger is-open" data-toggle="offcanvas">
+					<span class="hamb-top"></span>
+					<span class="hamb-middle"></span>
+					<span class="hamb-bottom"></span>
+				</button>
+				<div class="container">
+					<div class="fb-desktop-template">
+						<!--
+						<img src="assets/img/desktop-template.png" />
+						-->
+						<div id="build" class="fb-template-inner">
+							<form id="target" class="form-horizontal">
+							</form>
 						</div>
 					</div>
-				</div>				
-				<!-- / Building Form. -->       
+				</div>
 			</div>
-		</div> <!-- /container -->
+			<!-- /#page-content-wrapper -->
+
+		</div>
 
 		<script data-main="assets/js/main-built.js" src="assets/js/lib/require.js?v=3" ></script>
-	
+
 	</body>
 </html>
