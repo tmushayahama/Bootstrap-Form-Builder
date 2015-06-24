@@ -16,26 +16,25 @@ form .row {
 
 /*------FB TOOLS------*/
 .fb-tab-heading {
-	
+	line-height: 50px;
 }
 .fb-nav-tabs {
     position: relative;
     bottom: 30px;
-    clear:both;
-    border-bottom: 1px solid transparent;
+    border-bottom: 1px solid #C8C8C6;
 }
 
 .fb-nav-tabs > li {
     float: left;
+	border: #C8C8C6 solid 1px;
+	border-radius: 4px 4px 0 0;
     margin-bottom: -1px;
 }
 
 .fb-nav-tabs > li > a {
     margin-right: 2px;
     margin-top: 4px;
-    line-height: .85;
-    border: 1px solid transparent;
-    border-radius: 4px 4px 0 0;
+    line-height: .85;    
     color: #222;
 }
 
@@ -276,6 +275,7 @@ html { height: 100%;}
 
 .sidebar-nav {
     position: absolute;
+	padding-bottom: 200px; /*so that the last element when srolled to the bottom*/
     top: 50px;
 	bottom: 0;
     width: 400px;
@@ -288,7 +288,7 @@ html { height: 100%;}
 .sidebar-nav li {
     position: relative; 
     padding: 0px;
-	border-bottom: #74AFAD solid 1px;
+	border-bottom: #C8C8C6 solid 1px;
     display: inline-block;
     width: 100%;
 }
