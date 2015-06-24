@@ -28,15 +28,35 @@ define([
 			this.height = 0;
 		}
 
-		, targetRoomIndex: function() {
-			var target = $(".target");
+		, targetRoomIndex: function() {			
+			var $components = $(this.$el.find(".component"));
+			for (var i = 0; i<$components.length; i++ ) {
+				var $component = $components.eq(i);
+				console.log("======", i)
+				if ($component.hasClass('target')) {
+					return i;
+				}
+			}
+			//return $("#build form").index(".component.target") + 1;
+			/*var target = $(".target");
 			var targetParent = target.parent();
 			console.log(targetParent.attr("class"));
+			var $componentRows = $(this.$el.find(".component-row"));
+	count
+			var topelement = _.find($componentRows, function(component) {
+				if (($(component).offset().top + $(component).height()) > target.offset().top) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			});
+			
 			if (targetParent.hasClass("component-row")) {
 				return targetParent.index() + target.index();
 			} else {
 				return target.index();
-			}
+			} */
 		}
 
 		, removeTargetClasses: function($target) {
