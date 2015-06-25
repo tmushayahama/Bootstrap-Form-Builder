@@ -73,13 +73,12 @@
 
 .fb-nav-tabs-2 {
 	position: relative;
-	border: #74AFAD solid 1px;
 }
 
 .fb-nav-tabs-2 > li {
 	text-align: center;
 	padding: 0 0 0 3px;
-	border: none;
+	border: #74AFAD solid 1px;
 	margin-bottom: -1px;
 }
 
@@ -103,7 +102,6 @@
 	cursor: default;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
-	border-radius: 2px;
 	color: #EEE;
 	border-bottom-color: transparent;
 }
@@ -118,7 +116,6 @@
 
 .fb-desktop-template {
 	position: relative;
-	padding: 35px 35px 200px 35px;
 }
 
 .fb-desktop-template .fb-img-template {
@@ -132,8 +129,8 @@
 }
 
 .fb-desktop-template .fb-template-inner {
-	padding: 20px;
-	height: 450px;
+	padding: 60px 80px 0 80px;
+	height: 710px;
 }
 
 .fb-tablet-template {
@@ -183,11 +180,11 @@
 #target fieldset {
 	width: 100%;
 	border: none;
-	max-height: 420px;
+	height: 620px;
 	overflow-y: auto;
 	overflow-x: hidden;
 	padding: 5px;
-	padding-bottom: 30px;
+	padding-bottom: 200px;
 }
 .component-row {
 	padding: 0px;
