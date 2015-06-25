@@ -100,8 +100,11 @@
 }
 
 #target fieldset {
+	width: 100%;
 	border: none;
-	min-height: 600px;
+	max-height: 420px;
+	overflow-y: auto;
+	overflow-x: hidden;
 	padding: 5px;
 	padding-bottom: 30px;
 }
@@ -197,10 +200,6 @@ form .popover form {
 	user-select: none;
 }
 
-#target fieldset{
-	width: 100%;
-	overflow: hidden;
-}
 
 
 .nav>li>a {
