@@ -98,7 +98,7 @@ define([
 				title: "Original"
 				, collection: new MyFormSnippetsCollection([
 					{
-						"className": "component col-lg-12",
+						"className": "fb-house-full component col-lg-12",
 						"title": "Form Name",
 						"fields": {
 							"name": {

@@ -260,6 +260,94 @@
 			}
 		}
 	},
+	
+	{
+		"title": "Image Box",
+		"fields": {
+			"id": {
+				"label": "ID / Name",
+				"type": "input",
+				"value": "imagebox"
+			},
+			"label": {
+				"label": "Caption Text",
+				"type": "input",
+				"value": "Image Caption"
+			},
+			"placeholder": {
+				"label": "Placeholder",
+				"type": "input",
+				"value": "placeholder"
+			},
+			"helptext": {
+				"label": "Help Text",
+				"type": "input",
+				"value": "help"
+			},
+			"required": {
+				"label": "Required",
+				"type": "checkbox",
+				"value": false
+			},
+			"inputheight": {
+				"label": "Input Height",
+				"type": "select",
+				"value": [
+					{
+						"value": "input-sm",
+						"label": "Small",
+						"selected": false
+					},
+					{
+						"value": null,
+						"label": "Default",
+						"selected": true
+					},
+					{
+						"value": "input-lg",
+						"label": "Large",
+						"selected": false
+					}
+				]
+			},
+			"inputsize": {
+				"label": "Input Size",
+				"type": "select",
+				"value": [
+					{
+						"value": "col-md-2",
+						"label": "Mini",
+						"selected": false
+					},
+					{
+						"value": "col-md-3",
+						"label": "Small",
+						"selected": false
+					},
+					{
+						"value": "col-md-4",
+						"label": "Medium",
+						"selected": false
+					},
+					{
+						"value": "col-md-5",
+						"label": "Large",
+						"selected": false
+					},
+					{
+						"value": "col-md-6",
+						"label": "Xlarge",
+						"selected": true
+					},
+					{
+						"value": "col-md-8",
+						"label": "Xxlarge",
+						"selected": false
+					}
+				]
+			}
+		}
+	},
 	{
 		"title": "Button Drop Down",
 		"fields": {
@@ -435,7 +523,8 @@
 						"selected": false
 					}
 				]
-			}	}
+			}
+		}
 	},
 	{
 		"title": "File Button",
@@ -601,7 +690,8 @@
 					3,
 					4
 				]
-			}	}
+			}
+		}
 	},
 	{
 		"title": "Select Basic",
