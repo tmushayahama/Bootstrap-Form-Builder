@@ -1,4 +1,6 @@
-
+.container {
+ margin-left: 30px;
+}
 
 /*------OVERRIDES------*/
 .row {
@@ -28,45 +30,45 @@
 	font-size: 1.5em;
 	padding-top: 25px;
 }
-.fb-nav-tabs {	
-    position: relative;
-	margin-top: 10px;    
+.fb-nav-tabs {
+ position: relative;
+	margin-top: 10px;
 }
 
 .fb-nav-tabs > li {
 	text-align: center;
 	padding: 0 0 0 3px;
 	border: none;
-    margin-bottom: -1px;
+ margin-bottom: -1px;
 }
 
 .fb-nav-tabs > li > a {
 	width: 100%;
-	margin: 0;   
+	margin: 0;
 	margin-left: 3px;
 	border-radius: 7px 7px 0 0;
 	border: #C8C8C6 solid 2px;
-    line-height: 1.3em;    
-    color: #222;
+ line-height: 1.3em;
+ color: #222;
 	font-size: 0.8em;
 }
 
 .fb-nav-tabs > li > a:hover {
-    border-color: transparent;
-    color: #000;
-    background-color: transparent;
+ border-color: transparent;
+ color: #000;
+ background-color: transparent;
 }
 
 .fb-nav-tabs > li.active > a,
 .fb-nav-tabs > li.active > a:hover,
 .fb-nav-tabs > li.active > a:focus {
-    color: #EEE;
-    cursor: default;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    border-radius: 2px;
-    background-color: #c09853;
-    border-bottom-color: transparent;
+ color: #EEE;
+ cursor: default;
+ -webkit-border-radius: 2px;
+ -moz-border-radius: 2px;
+ border-radius: 2px;
+ background-color: #c09853;
+ border-bottom-color: transparent;
 }
 
 @media (max-width: 979px) {
@@ -74,8 +76,7 @@
 		padding-top: 0px;
 	}
 }
-.fb-desktop-template { 	
-	max-width: 800px;
+.fb-desktop-template {
 	position: relative;
 	padding: 35px 35px 200px 35px;
 }
@@ -84,13 +85,53 @@
 	opacity: 0.2;
 	position:absolute;
 	width: 100%;
-    left:0;
+ left:0;
 	right: 0;
-    top:0;
+ top:0;
 	bottom: 0;
 }
 
 .fb-desktop-template .fb-template-inner {
+	padding: 20px;
+	height: 450px;
+}
+
+.fb-tablet-template {
+	position: relative;
+	padding: 35px 35px 200px 35px;
+}
+
+.fb-tablet-template .fb-img-template {
+	opacity: 0.2;
+	position:absolute;
+	width: 100%;
+ left:0;
+	right: 0;
+ top:0;
+	bottom: 0;
+}
+
+.fb-tablet-template .fb-template-inner {
+	padding: 20px;
+	height: 300px;
+}
+
+.fb-phone-template {
+	position: relative;
+	padding: 35px 35px 200px 35px;
+}
+
+.fb-phone-template .fb-img-template {
+	opacity: 0.2;
+	position:absolute;
+	width: 100%;
+ left:0;
+	right: 0;
+ top:0;
+	bottom: 0;
+}
+
+.fb-phone-template .fb-template-inner {
 	padding: 20px;
 	height: 450px;
 }
@@ -224,13 +265,13 @@ form .popover form {
 
 body {
 	background-color: #FFF;
-    position: relative;
-    overflow-x: hidden;
+ position: relative;
+ overflow-x: hidden;
 }
 body,
 html { height: 100%;}
-.nav .open > a, 
-.nav .open > a:hover, 
+.nav .open > a,
+.nav .open > a:hover,
 .nav .open > a:focus {background-color: transparent;}
 
 /*-------------------------------*/
@@ -238,32 +279,32 @@ html { height: 100%;}
 /*-------------------------------*/
 
 #wrapper {
-    padding-left: 0;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+ padding-left: 0;
+ -webkit-transition: all 0.5s ease;
+ -moz-transition: all 0.5s ease;
+ -o-transition: all 0.5s ease;
+ transition: all 0.5s ease;
 }
 
 #wrapper.toggled {
-    padding-left: 400px;
+ padding-left: 400px;
 }
 
 #sidebar-wrapper {
 	position: fixed;
-    z-index: 1000;
+ z-index: 1000;
 	top: 60px;
-    left: 400px;
-    width: 0;
-    height: 100%;
-    margin-left: -400px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    background: #ECECEA;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+ left: 400px;
+ width: 0;
+ height: 100%;
+ margin-left: -400px;
+ overflow-y: auto;
+ overflow-x: hidden;
+ background: #ECECEA;
+ -webkit-transition: all 0.5s ease;
+ -moz-transition: all 0.5s ease;
+ -o-transition: all 0.5s ease;
+ transition: all 0.5s ease;
 }
 
 #sidebar-wrapper::-webkit-scrollbar {
@@ -271,17 +312,17 @@ html { height: 100%;}
 }
 
 #wrapper.toggled #sidebar-wrapper {
-    width: 400px;
+ width: 400px;
 }
 
 #page-content-wrapper {
-    width: 100%;
-    padding-top: 70px;
+ width: 100%;
+ padding-top: 70px;
 }
 
 #wrapper.toggled #page-content-wrapper {
-    position: absolute;
-    margin-right: -400px;
+ position: absolute;
+ margin-right: -400px;
 }
 
 /*-------------------------------*/
@@ -289,54 +330,54 @@ html { height: 100%;}
 /*-------------------------------*/
 
 .sidebar-nav {
-    position: absolute;
+ position: absolute;
 	padding-bottom: 200px; /*so that the last element when srolled to the bottom*/
-    top: 62px;
+ top: 62px;
 	bottom: 0;
-    width: 400px;
-    margin: 0;
-    padding: 0;
+ width: 400px;
+ margin: 0;
+ padding: 0;
 	overflow-x: auto;
-    list-style: none;
+ list-style: none;
 }
 
 .sidebar-nav li {
-    position: relative; 
-    padding: 0px;
+ position: relative;
+ padding: 0px;
 	border-bottom: #C8C8C6 solid 1px;
-    display: inline-block;
-    width: 100%;
+ display: inline-block;
+ width: 100%;
 }
 .sidebar-nav li .component {
-    position: relative; 
-    padding: 10px 0px;
+ position: relative;
+ padding: 10px 0px;
 	border-bottom: #74AFAD;
-    display: inline-block;
-    width: 100%;
+ display: inline-block;
+ width: 100%;
 }
 
 .sidebar-nav li:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    height: 100%;
-    width: 3px;
-    background-color: #1c1c1c;
-    -webkit-transition: width .2s ease-in;
+ content: '';
+ position: absolute;
+ top: 0;
+ left: 0;
+ z-index: -1;
+ height: 100%;
+ width: 3px;
+ background-color: #1c1c1c;
+ -webkit-transition: width .2s ease-in;
 	-moz-transition:  width .2s ease-in;
 	-ms-transition:  width .2s ease-in;
 	transition: width .2s ease-in;
 
 }
 .sidebar-nav li:before {
-    background-color: #D1D1CF;   
+ background-color: #D1D1CF;
 }
 .sidebar-nav li:hover:before,
 .sidebar-nav li.open:hover:before {
-    width: 100%;
-    -webkit-transition: width .2s ease-in;
+ width: 100%;
+ -webkit-transition: width .2s ease-in;
 	-moz-transition:  width .2s ease-in;
 	-ms-transition:  width .2s ease-in;
 	transition: width .2s ease-in;
@@ -344,10 +385,10 @@ html { height: 100%;}
 }
 
 .sidebar-nav li a {
-    display: block;
-    color: #ddd;
-    text-decoration: none;
-    padding: 10px 15px 10px 30px;    
+ display: block;
+ color: #ddd;
+ text-decoration: none;
+ padding: 10px 15px 10px 30px;
 }
 
 .sidebar-nav li a:hover,
@@ -356,25 +397,25 @@ html { height: 100%;}
 .sidebar-nav li.open a:hover,
 .sidebar-nav li.open a:active,
 .sidebar-nav li.open a:focus{
-    color: #fff;
-    text-decoration: none;
-    background-color: transparent;
+ color: #fff;
+ text-decoration: none;
+ background-color: transparent;
 }
 
 .sidebar-nav > .sidebar-brand {
-    height: 65px;
-    font-size: 20px;
-    line-height: 44px;
+ height: 65px;
+ font-size: 20px;
+ line-height: 44px;
 }
 .sidebar-nav .dropdown-menu {
-    position: relative;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    border-radius: 0;
-    border: none;
-    background-color: #222;
-    box-shadow: none;
+ position: relative;
+ width: 100%;
+ padding: 0;
+ margin: 0;
+ border-radius: 0;
+ border: none;
+ background-color: #222;
+ box-shadow: none;
 }
 
 /*-------------------------------*/
@@ -383,7 +424,7 @@ html { height: 100%;}
 
 .hamburger {
 	position: fixed;
-	top: 55px;  
+	top: 55px;
 	z-index: 999;
 	display: block;
 	width: 32px;
@@ -432,8 +473,8 @@ html { height: 100%;}
 .hamburger.is-closed .hamb-bottom {
 	background-color: #1a1a1a;
 }
-.hamburger.is-closed .hamb-top { 
-	top: 5px; 
+.hamburger.is-closed .hamb-top {
+	top: 5px;
 	-webkit-transition: all .35s ease-in-out;
 }
 .hamburger.is-closed .hamb-middle {
@@ -441,7 +482,7 @@ html { height: 100%;}
 	margin-top: -2px;
 }
 .hamburger.is-closed .hamb-bottom {
-	bottom: 5px;  
+	bottom: 5px;
 	-webkit-transition: all .35s ease-in-out;
 }
 
@@ -461,9 +502,9 @@ html { height: 100%;}
 .hamburger.is-open .hamb-top,
 .hamburger.is-open .hamb-bottom {
 	top: 50%;
-	margin-top: -2px;  
+	margin-top: -2px;
 }
-.hamburger.is-open .hamb-top { 
+.hamburger.is-open .hamb-top {
 	-webkit-transform: rotate(45deg);
 	-webkit-transition: -webkit-transform .2s cubic-bezier(.73,1,.28,.08);
 }
