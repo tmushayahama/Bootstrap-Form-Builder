@@ -209,6 +209,7 @@ define([
            .height(targetRoom.height);
   }
   , getRoomNumber: function ($component, childrenCount, pageX) {
+	   console.log("children", childrenCount + 1, $component)
    var roomWidth = $component.width() / (childrenCount + 1);
    var houseLeftPosition = $component.offset().left;
    for (var n = 0; n < childrenCount + 1; n++) {
@@ -227,7 +228,7 @@ define([
     //case when there are no form elements, i.e. only the label name
     thisModel.createTargetRoom($component, 0).insertAfter($component);
    } else {
-    var childrenCount = $component.length;
+    var childrenCount = $component.children().length;
     var roomNumber = thisModel.getRoomNumber($component, childrenCount, mouseEvent.pageX);
     console.log("pppppppppp", roomNumber, childrenCount);
     if (roomNumber === 0) {
@@ -236,9 +237,9 @@ define([
     } else if (roomNumber === 1) {
      var $room = $component.children(".component").eq(0);
      thisModel.createTargetRoom($component, childrenCount).insertAfter($room);
-    } else {
-     var $room = $component.children(".component").eq(roomNumber);
-     console.log("3+  ", roomNumber, $room);
+    } else if (roomNumber === 2) {
+     var $room = $component.children(".component").eq(1);
+     console.log("3+  ", roomNumber,"  ", childrenCount, $room);
      thisModel.createTargetRoom($component, childrenCount).insertAfter($room);
     }
     return false;

@@ -40,7 +40,7 @@
 						<div class="fb-tab-heading col-lg-4">
 							Controls
 						</div>
-						<ul class="fb-nav-tabs nav col-lg-8" id="formtabs">
+						<ul class="fb-nav-tabs-1 nav col-lg-8" id="formtabs">
 							<!-- Tab nav -->
 						</ul>
 					</div>
@@ -65,65 +65,85 @@
 					<span class="hamb-bottom"></span>
 				</button>
 				<div class="container">
-     <ul class="nav nav-tabs text-center" role="tablist">
-      <li role="presentation" class="active col-lg-4">
-       <a href="#fb-desktop" aria-controls="fb-desktop" role="tab" data-toggle="tab">
-        <i class="fa fa-2x fa-desktop"></i>
-        <p class="">
-         <span class="fb-truncate">Desktop</span><br>
-         <small class="fb-truncate">1170px +</small>
-        </p>
-       </a>
-      </li>
-      <li role="presentation" class="col-lg-4">
-       <a href="#fb-tablet" aria-controls="fb-tablet" role="tab" data-toggle="tab">
-        <i class="fa fa-2x fa-tablet"></i>
-        <p class="">
-         <span class="fb-truncate">Tablet</span><br>
-         <small class="fb-truncate">992 +</small>
-        </p>
-       </a>
-      </li>
-      <li role="presentation" class="col-lg-4">
-       <a href="#fb-phone" aria-controls="fb-phone" role="tab" data-toggle="tab">
-        <i class="fa fa-2x fa-mobile-phone"></i>
-        <p class="">
-         <span class="fb-truncate">Phone</span><br>
-         <small class="fb-truncate">768 -</small>
-        </p>
-       </a>
-      </li>
-     </ul>
-     <!-- Tab panes -->
-     <div class="tab-content">
-      <div role="tabpanel" class="tab-pane active" id="fb-desktop">
-       <div class="fb-desktop-template col-lg-12 col-md-12">
-        <img class="fb-img-template" src="assets/img/desktop-template.png" />
-        <div id="build" class="fb-template-inner">
-         <form id="target" class="form-horizontal">
-         </form>
-        </div>
-       </div>
-      </div>
-      <div role="tabpanel" class="tab-pane" id="fb-tablet">
-       <div class="fb-tablet-template col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1">
-        <img class="fb-img-template" src="assets/img/tablet-template.png" />
-        <div id="build-tablet" class="fb-template-inner">
-         <form id="target-tablet" class="form-horizontal">
-         </form>
-        </div>
-       </div>
-      </div>
-      <div role="tabpanel" class="tab-pane active" id="fb-phone">
-       <div class="fb-phone-template col-lg-8 col-md-8 col-lg-offset-2 col-md-offset-2">
-        <img class="fb-img-template" src="assets/img/phone-template.png" />
-        <div id="build-phone" class="fb-template-inner">
-         <form id="target-phone" class="form-horizontal">
-         </form>
-        </div>
-       </div>
-      </div>
-     </div>
+					<div class="row">
+						<ul class="col-lg-8 col-lg-offset-2 fb-nav-tabs-2 nav nav-tabs text-center" role="tablist">
+							<li role="presentation" class="active col-lg-4">
+								<a href="#fb-desktop" aria-controls="fb-desktop" role="tab" data-toggle="tab">
+									<i class="fa fa-3x fa-desktop"></i>
+									<div class="">
+										<h4 class="fb-truncate">Desktop</h4>
+										<div class="">
+											<i class="col-lg-2 fa fa-arrow-left"></i>
+											<small class="col-lg-8 text-center">
+												> 1170px
+											</small>			
+											<i class="col-lg-2 fa fa-arrow-left"></i>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li role="presentation" class="col-lg-4">
+								<a href="#fb-tablet" aria-controls="fb-tablet" role="tab" data-toggle="tab">
+									<div class="">
+										<i class="fa fa-3x fa-tablet"></i>
+										<h4 class="fb-truncate">Tablet</h4>
+										<div class="">
+											<i class="col-lg-2 fa fa-arrow-left"></i>
+											<small class="col-lg-8 text-center">
+												768px - 1170px
+											</small>			
+											<i class="col-lg-2 fa fa-arrow-left"></i>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li role="presentation" class="col-lg-4">
+								<a href="#fb-phone" aria-controls="fb-phone" role="tab" data-toggle="tab">
+									<div class="">
+										<i class="fa fa-3x fa-tablet"></i>
+										<h4 class="fb-truncate">Phone</h4>
+										<div class="">
+											<i class="col-lg-2 fa fa-arrow-left"></i>
+											<small class="col-lg-8 text-center">
+												< 768px
+											</small>			
+											<i class="col-lg-2 fa fa-arrow-left"></i>
+										</div>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<!-- Tab panes -->
+					<div class="tab-content row">
+						<div role="tabpanel" class="tab-pane active" id="fb-desktop">
+							<div class="fb-desktop-template col-lg-12 col-md-12">
+								<img class="fb-img-template" src="assets/img/desktop-template.png" />
+								<div id="build" class="fb-template-inner">
+									<form id="target" class="form-horizontal">
+									</form>
+								</div>
+							</div>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="fb-tablet">
+							<div class="fb-tablet-template col-lg-8 col-md-10 col-lg-offset-1 col-md-offset-1">
+								<img class="fb-img-template" src="assets/img/tablet-template.png" />
+								<div id="build-tablet" class="fb-template-inner">
+									<form id="target-tablet" class="form-horizontal">
+									</form>
+								</div>
+							</div>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="fb-phone">
+							<div class="fb-phone-template col-lg-6 col-md-6 col-lg-offset-3 col-md-offset-3">
+								<img class="fb-img-template" src="assets/img/phone-template.png" />
+								<div id="build-phone" class="fb-template-inner">
+									<form id="target-phone" class="form-horizontal">
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<!-- /#page-content-wrapper -->
