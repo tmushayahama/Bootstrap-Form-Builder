@@ -2,13 +2,13 @@ define([
 	"jquery", "underscore", "backbone"
 			, "collections/snippets", "collections/my-form-snippets"
 			, "views/tab", "views/my-form"
-			, "text!data/input.json", "text!data/radio.json", "text!data/select.json", "text!data/buttons.json"
+			, "text!data/input.json", "text!data/combination-input.json", "text!data/radio.json", "text!data/select.json", "text!data/buttons.json"
 			, "text!templates/app/render.html", "text!templates/app/about.html",
 ], function(
 		$, _, Backbone
 		, SnippetsCollection, MyFormSnippetsCollection
 		, TabView, MyFormView
-		, inputJSON, radioJSON, selectJSON, buttonsJSON
+		, inputJSON, combinationInputJSON, radioJSON, selectJSON, buttonsJSON
 		, renderTab, aboutTab
 		) {
 	return {
@@ -23,7 +23,7 @@ define([
 			new TabView({
 				title: "Combined",
 				iconClassName: "fa fa-th-large",
-			   collection: new SnippetsCollection(JSON.parse(inputJSON))
+			   collection: new SnippetsCollection(JSON.parse(combinationInputJSON))
 			});
 			/*
 			 new TabView({
