@@ -15,13 +15,15 @@ define([
 		initialize: function() {
 
 			//Bootstrap tabs from json.
-			new TabView({
-				title: "Controls"
-				, collection: new SnippetsCollection(JSON.parse(inputJSON))
+			new TabView({				
+				title: "Basic",
+				iconClassName: "fa fa-list-alt",
+			 collection: new SnippetsCollection(JSON.parse(inputJSON))
 			});
 			new TabView({
-				title: "Combined Controls"
-				, collection: new SnippetsCollection(JSON.parse(inputJSON))
+				title: "Combined",
+				iconClassName: "fa fa-th-large",
+			   collection: new SnippetsCollection(JSON.parse(inputJSON))
 			});
 			/*
 			 new TabView({

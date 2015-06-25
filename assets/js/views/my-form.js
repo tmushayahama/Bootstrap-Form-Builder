@@ -28,9 +28,9 @@ define([
 			this.height = 0;
 		}
 
-		, targetRoomIndex: function() {			
+		, targetRoomIndex: function() {
 			var $components = $(this.$el.find(".component"));
-			for (var i = 0; i<$components.length; i++ ) {
+			for (var i = 0; i < $components.length; i++) {
 				var $component = $components.eq(i);
 				if ($component.hasClass('target')) {
 					return i;
@@ -151,21 +151,37 @@ define([
 						});
 						break;
 					case 2:
+						var maxHeight = 0;
 						$children.each(function() {
 							var $child = $(this);
 							$child.removeClass(function(index, css) {
 								return (css.match(/(^|\s)col-\S+/g) || []).join(' ');
 							});
 							$child.addClass("col-lg-6");
+							if ($child.height() > maxHeight) {
+								maxHeight = $child.height();
+							}
+						});
+						$children.each(function() {
+							var $child = $(this);
+							$child.height(maxHeight);
 						});
 						break;
 					case 3:
+						var maxHeight = 0;
 						$children.each(function() {
 							var $child = $(this);
 							$child.removeClass(function(index, css) {
 								return (css.match(/(^|\s)col-\S+/g) || []).join(' ');
 							});
 							$child.addClass("col-lg-4");
+							if ($child.height() > maxHeight) {
+								maxHeight = $child.height();
+							}
+						});
+						$children.each(function() {
+							var $child = $(this);
+							$child.height(maxHeight);
 						});
 						break;
 				}
