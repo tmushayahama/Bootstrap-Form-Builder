@@ -87,10 +87,10 @@ define([
 		}
 
 		, removeComponent: function(model, collection, options) {
-			
+
 			//console.log("Options", options, model, collection)
 			//Render Snippet Views
-			$("#build form").find(".component:eq("+options.index+")").remove();
+			$("#build form").find(".component:eq(" + options.index + ")").remove();
 			this.prettifyComponentRows();
 			this.prettifyCollection();
 			this.$el.empty();
@@ -108,7 +108,7 @@ define([
 			this.$el.appendTo("#build form");
 
 			//this.prettifyComponentRows();
-			this.delegateEvents(); 
+			this.delegateEvents();
 		}
 
 		, getHousePosition: function(eventY) {
@@ -147,6 +147,21 @@ define([
 					i += 1;
 				}
 			}
+
+			$("#build form .component-row").each(function() {
+				var $children = $(this).find(".component");
+				var maxHeight = 0;
+				$children.each(function() {
+					var $child = $(this);
+					if ($child.height() > maxHeight) {
+						maxHeight = $child.height();
+					}
+				});
+				$children.each(function() {
+					var $child = $(this);
+					$child.height(maxHeight);
+				});
+			});
 		}
 
 		, prettifyCollection: function() {
@@ -175,37 +190,21 @@ define([
 						});
 						break;
 					case 2:
-						var maxHeight = 0;
 						$children.each(function() {
 							var $child = $(this);
 							$child.removeClass(function(index, css) {
 								return (css.match(/(^|\s)col-\S+/g) || []).join(' ');
 							});
 							$child.addClass("col-lg-6");
-							if ($child.height() > maxHeight) {
-								maxHeight = $child.height();
-							}
-						});
-						$children.each(function() {
-							var $child = $(this);
-							$child.height(maxHeight);
 						});
 						break;
 					case 3:
-						var maxHeight = 0;
 						$children.each(function() {
 							var $child = $(this);
 							$child.removeClass(function(index, css) {
 								return (css.match(/(^|\s)col-\S+/g) || []).join(' ');
 							});
 							$child.addClass("col-lg-4");
-							if ($child.height() > maxHeight) {
-								maxHeight = $child.height();
-							}
-						});
-						$children.each(function() {
-							var $child = $(this);
-							$child.height(maxHeight);
 						});
 						break;
 				}
@@ -251,7 +250,7 @@ define([
 			if (mouseEvent.pageY >= $component.offset().top + $component.height() - 20) {
 				//case when there are no form elements, i.e. only the label name
 				thisModel.createTargetRoom($component, 0).insertAfter($component);
-			} else if (!$component.hasClass("gb-house-full")) {
+			} else if (!$component.hasClass("fb-house-full")) {
 				var childrenCount = $component.children().length;
 				var roomNumber = thisModel.getRoomNumber($component, childrenCount, mouseEvent.pageX);
 				console.log("pppppppppp", roomNumber, childrenCount);
