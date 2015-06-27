@@ -1,7 +1,7 @@
 <!-- Select Multiple -->
 <div class="form-group">
-  <label class="col-lg-4 col-md-4 control-label" for="<%= id %>"><%= label %></label>
-  <div class="col-lg-8 col-md-8 <%= inputsize %>">
+  <label class="col-lg-4 col-md-4 col-sm-12 col-xs-12 control-label" for="<%= id %>"><%= label %></label>
+  <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 <%= inputsize %>">
     <select id="<%= id %>" name="<%= id %>" class="form-control <%= inputheight %>" multiple="multiple"><% _.each(options, function(option) { %>
       <option><%= option %></option><% }); %>
     </select>

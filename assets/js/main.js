@@ -11,6 +11,14 @@ require.config({
     'bootstrap': {
       deps: ['jquery'],
       exports: '$.fn.popover'
+    },
+	'ResizeSensor': {
+      deps: ['jquery'],
+	  exports: 'ResizeSensor'
+    },
+	'ElementQueries': {
+      deps: ['jquery'],
+	  exports: 'ElementQueries'
     }
   }
   , paths: {

@@ -4,12 +4,14 @@ define([
 			, "views/tab", "views/my-form"
 			, "text!data/input.json", "text!data/combination-input.json", "text!data/radio.json", "text!data/select.json", "text!data/buttons.json"
 			, "text!templates/app/render.html", "text!templates/app/about.html",
+			'ResizeSensor',	'ElementQueries',
 ], function(
 		$, _, Backbone
 		, SnippetsCollection, MyFormSnippetsCollection
 		, TabView, MyFormView
 		, inputJSON, combinationInputJSON, radioJSON, selectJSON, buttonsJSON
 		, renderTab, aboutTab
+		, ResizeSensor,	ElementQueries
 		) {
 	return {
 		initialize: function() {
@@ -92,6 +94,83 @@ define([
 				}
 
 			});
+			
+			
+			
+			
+				var ResizerDemo = new Class({
+					y: null,
+					initialize: function(container) {
+						this.container = container;
+						this.setupLayout();
+					},
+					setupLayout: function() {
+						this.handler = new Element('div', {
+							'class': 'resizerDemo-handler'
+						}).inject(this.container);
+
+						this.container.makeResizable({
+							snap: 0,
+							handle: this.handler,
+							modifiers: {
+								'x': 'width',
+								'y': this.y
+							}
+						});
+					}
+				});
+
+				var ResizeDemoXY = new Class({
+					Extends: ResizerDemo,
+					y: 'height'
+				});
+
+				window.addEvent('domready', function() {
+					$$('.examplesResizerDemos').each(function(resizer) {
+						new ResizerDemo(resizer);
+					});
+					$$('.examplesResizerDemosXY').each(function(resizer) {
+						new ResizeDemoXY(resizer);
+					});
+				});
+				
+				var container = $('dynamicContainer');
+					var dynamicCount = $('dynamicCount');
+					var dynamicCounter = $('dynamicCounter');
+
+					window.detachDynamic = function() {
+						container.getChildren().each(function(element) {
+							ResizeSensor.detach(element);
+						});
+					};
+
+					window.removeDynamic = function() {
+						container.empty();
+					};
+
+					window.addDynamic = function() {
+						container.empty();
+						var i = 0, to = dynamicCount.value, div, counter = 0;
+						for (; i < to; i++) {
+							div = new Element('div', {
+								'class': 'dynamicElement',
+								text: '#' + i
+							}).inject(container);
+
+							new ResizeSensor(div, function() {
+								counter++;
+								dynamicCounter.set('text', counter + ' changes.');
+							});
+						}
+					}
+					
+					
+					
+					
+					
+					
+					
+			
 
 			// Bootstrap "My Form" with 'Form Name' snippet.
 			new MyFormView({
