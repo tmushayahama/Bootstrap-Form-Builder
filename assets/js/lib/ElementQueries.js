@@ -5,6 +5,8 @@
  */
 ;
 (function() {
+	
+	console.log("Awake ElementQueries");
     /**
      *
      * @type {Function}
