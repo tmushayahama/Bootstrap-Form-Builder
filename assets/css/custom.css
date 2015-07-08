@@ -28,6 +28,24 @@ form img {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+.fb-disabled {
+	opacity: .5;
+    pointer-events: none;
+}
+.fb-coming-soon {
+	position: absolute;	
+	top: 30px;
+	right: 0;
+	bottom: 0;
+	color:  #fc4c5e; 
+	font-size: 1.5em;
+	z-index: 1000;
+	-webkit-transform: rotate(48deg);
+	-moz-transform: rotate(48deg);
+	-o-transform: rotate(48deg);
+	writing-mode: lr-tb;
+}
+
 .tab-nav-container {
 	border-bottom: 2px solid #C8C8C6;
 }
