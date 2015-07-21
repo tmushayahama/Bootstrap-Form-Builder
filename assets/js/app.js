@@ -4,28 +4,67 @@ define([
 			, "views/tab", "views/my-form"
 			, "text!data/input.json", "text!data/combination-input.json", "text!data/radio.json", "text!data/select.json", "text!data/buttons.json"
 			, "text!templates/app/render.html", "text!templates/app/about.html",
-			'ResizeSensor',	'ElementQueries',
+	'ResizeSensor', 'ElementQueries',
 ], function(
 		$, _, Backbone
 		, SnippetsCollection, MyFormSnippetsCollection
 		, TabView, MyFormView
 		, inputJSON, combinationInputJSON, radioJSON, selectJSON, buttonsJSON
 		, renderTab, aboutTab
-		, ResizeSensor,	ElementQueries
+		, ResizeSensor, ElementQueries
 		) {
 	return {
 		initialize: function() {
 
 			//Bootstrap tabs from json.
-			new TabView({				
+			new TabView({
 				title: "Basic",
 				iconClassName: "fa fa-list-alt",
-			 collection: new SnippetsCollection(JSON.parse(inputJSON))
+				collection: new SnippetsCollection(JSON.parse(inputJSON))
 			});
 			new TabView({
 				title: "Combined",
 				iconClassName: "fa fa-th-large",
-			   collection: new SnippetsCollection(JSON.parse(combinationInputJSON))
+				collection: new SnippetsCollection(JSON.parse(combinationInputJSON))
+			});
+
+			var WebFormHelper = function(id) {
+				var model = {
+				};
+				this.state = '';
+			};
+			WebFormHelper.prototype.saveForm = function() {
+				console.log("I am saved")
+			};
+			
+			WebFormHelper.prototype.viewForm = function() {
+				console.log("I am viewed")
+			};
+
+			WebFormHelper.prototype.publishForm = function() {
+				console.log("I am published")
+			};
+
+			WebFormHelper.prototype.clearForm = function() {
+				console.log("I am cleared")
+			};
+
+			var webFormHelper = new WebFormHelper(1);
+
+			$("body").on("click", ".fb-save-form-btn", function(e) {
+				webFormHelper.saveForm();
+			});
+			
+			$("body").on("click", ".fb-view-form-btn", function(e) {
+				webFormHelper.viewForm();
+			});
+
+			$("body").on("click", ".fb-publish-form-btn", function(e) {
+				webFormHelper.publishForm();
+			});
+
+			$("body").on("click", ".fb-clear-form-btn", function(e) {
+				webFormHelper.clearForm();
 			});
 			/*
 			 new TabView({
@@ -94,83 +133,7 @@ define([
 				}
 
 			});
-			
-			
-			
-			
-				var ResizerDemo = new Class({
-					y: null,
-					initialize: function(container) {
-						this.container = container;
-						this.setupLayout();
-					},
-					setupLayout: function() {
-						this.handler = new Element('div', {
-							'class': 'resizerDemo-handler'
-						}).inject(this.container);
 
-						this.container.makeResizable({
-							snap: 0,
-							handle: this.handler,
-							modifiers: {
-								'x': 'width',
-								'y': this.y
-							}
-						});
-					}
-				});
-
-				var ResizeDemoXY = new Class({
-					Extends: ResizerDemo,
-					y: 'height'
-				});
-
-				window.addEvent('domready', function() {
-					$$('.examplesResizerDemos').each(function(resizer) {
-						new ResizerDemo(resizer);
-					});
-					$$('.examplesResizerDemosXY').each(function(resizer) {
-						new ResizeDemoXY(resizer);
-					});
-				});
-				
-				var container = $('dynamicContainer');
-					var dynamicCount = $('dynamicCount');
-					var dynamicCounter = $('dynamicCounter');
-
-					window.detachDynamic = function() {
-						container.getChildren().each(function(element) {
-							ResizeSensor.detach(element);
-						});
-					};
-
-					window.removeDynamic = function() {
-						container.empty();
-					};
-
-					window.addDynamic = function() {
-						container.empty();
-						var i = 0, to = dynamicCount.value, div, counter = 0;
-						for (; i < to; i++) {
-							div = new Element('div', {
-								'class': 'dynamicElement',
-								text: '#' + i
-							}).inject(container);
-
-							new ResizeSensor(div, function() {
-								counter++;
-								dynamicCounter.set('text', counter + ' changes.');
-							});
-						}
-					}
-					
-					
-					
-					
-					
-					
-					
-			
 
 			// Bootstrap "My Form" with 'Form Name' snippet.
 			new MyFormView({
