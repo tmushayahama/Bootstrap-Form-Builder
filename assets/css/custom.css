@@ -98,29 +98,34 @@ form img {
 	position: relative;
 }
 
-.fb-nav-tabs-2 > li {
+.fb-nav-tabs-2 .fb-heading {
+	padding: 15px 0 0 30px;
+	font-size: 1.3em;	
+}
+
+.fb-nav-tabs-2 li {
 	text-align: center;
 	padding: 0 0 0 3px;
 	border: #74AFAD solid 1px;
 	margin-bottom: -1px;
 }
 
-.fb-nav-tabs-2 > li > a {
-	height: 120px;
+.fb-nav-tabs-2 li > a {
+	height: 50px;
 	width: 100%;
 	margin: 0;
 	color: #222;
 	font-size: 0.9em;
 }
 
-.fb-nav-tabs-2 > li > a:hover {
+.fb-nav-tabs-2 li > a:hover {
 	color: #000;
 	background-color: #80C1BF;
 }
 
-.fb-nav-tabs-2 > li.active > a,
-.fb-nav-tabs-2 > li.active > a:hover,
-.fb-nav-tabs-2 > li.active > a:focus {
+.fb-nav-tabs-2 li.active > a,
+.fb-nav-tabs-2 li.active > a:hover,
+.fb-nav-tabs-2 li.active > a:focus {
 	background-color: #74AFAD;
 	cursor: default;
 	-webkit-border-radius: 2px;
@@ -186,6 +191,11 @@ form img {
 .fb-phone-template .fb-template-inner {
 	padding: 20px;
 	height: 450px;
+}
+#build,
+#build-view{
+	height: 750px;
+	border: #AAA solid 1px;
 }
 
 #components {
