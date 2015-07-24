@@ -261,6 +261,18 @@
 		}
 	},
 	
+	
+	{
+		"title": "White Space",
+		"fields": {
+			"id": {
+				"label": "ID / Name",
+				"type": "input",
+				"value": "whitespace"
+			}
+		}
+	},
+	
 	{
 		"title": "Image Box",
 		"fields": {
@@ -272,7 +284,7 @@
 			"src": {
 				"label": "Source",
 				"type": "input",
-				"value": "/formbuilder-assets/img/img-placeholder.png"
+				"value": "assets/img/img-placeholder.png"
 			},
 			"label": {
 				"label": "Caption Text",

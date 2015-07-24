@@ -4,7 +4,9 @@ form img {
 }
 
 /*------OVERRIDES------*/
-
+h3 {
+	margin: 0;
+}
 .row {
 	margin-left: 0;
 	margin-right: 0;

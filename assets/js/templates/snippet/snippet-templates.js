@@ -20,7 +20,8 @@ define(function(require) {
   , selectbasic              = require('text!templates/snippet/selectbasic.html')
   , selectmultiple           = require('text!templates/snippet/selectmultiple.html')
   , textarea                 = require('text!templates/snippet/textarea.html')
-   , imagebox                = require('text!templates/snippet/imagebox.html');
+   , imagebox                = require('text!templates/snippet/imagebox.html')
+      , whitespace                = require('text!templates/snippet/whitespace.html');;
 
   return {
     formname                   : formname
@@ -43,6 +44,7 @@ define(function(require) {
     , selectbasic              : selectbasic
     , selectmultiple           : selectmultiple
     , textarea                 : textarea
-    , imagebox                : imagebox
+    , imagebox                 : imagebox
+	, whitespace			   : whitespace
   };
 });
