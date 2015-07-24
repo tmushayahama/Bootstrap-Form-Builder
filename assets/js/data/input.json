@@ -272,7 +272,7 @@
 			"src": {
 				"label": "Source",
 				"type": "input",
-				"value": "assets/img/img-placeholder.png"
+				"value": "/formbuilder-assets/img/img-placeholder.png"
 			},
 			"label": {
 				"label": "Caption Text",
