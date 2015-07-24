@@ -18,43 +18,85 @@ define([
 
 			//Bootstrap tabs from json.
 			new TabView({
-				title: "Basic",
+				title: "Basic Controls",
 				iconClassName: "fa fa-list-alt",
 				collection: new SnippetsCollection(JSON.parse(inputJSON))
 			});
 			new TabView({
-				title: "Combined",
+				title: "Advanced Controls",
 				iconClassName: "fa fa-th-large",
 				collection: new SnippetsCollection(JSON.parse(combinationInputJSON))
 			});
 
 			var WebFormHelper = function(id) {
-				var model = {
-				};
-				this.state = '';
+				this.id = id;
 			};
+
+			WebFormHelper.prototype.loadForm = function() {
+				console.log("I am being loaded");
+
+				var self = this;
+
+				var request = $.ajax({
+					url: ".../formId/" + self.id,
+					method: "GET",
+					data: {},
+					dataType: "json"
+				});
+
+				request.done(function(data) {
+					$("#target").html(data.Content);
+				});
+
+				request.fail(function(jqXHR, textStatus) {
+					console.log("Form load failed: " + textStatus);
+				});
+
+			};
+
 			WebFormHelper.prototype.saveForm = function() {
-				console.log("I am saved")
+				console.log("I am saved");
+				var self = this;
+				var content = $("#target").html();
+
+				var request = $.ajax({
+					url: ".../formId/" + self.id,
+					method: "POST",
+					data: {Content: content},
+					dataType: "json"
+				});
+
+				request.done(function(data) {
+					$("#info").html("saved");
+				});
+
+				request.fail(function(jqXHR, textStatus) {
+					console.log("Form load failed: " + textStatus);
+				});
 			};
-			
+
 			WebFormHelper.prototype.viewForm = function() {
-				console.log("I am viewed")
+				console.log("I am viewed");
+				console.log($("#target").html());
 			};
 
 			WebFormHelper.prototype.publishForm = function() {
-				console.log("I am published")
+				console.log("I am published");
 			};
 
 			WebFormHelper.prototype.clearForm = function() {
-				console.log("I am cleared")
+				console.log("I am cleared");
 			};
+			
+			
 
 			var webFormHelper = new WebFormHelper(1);
+			webFormHelper.loadForm();
 
 			$("body").on("click", ".fb-save-form-btn", function(e) {
 				webFormHelper.saveForm();
 			});
-			
+
 			$("body").on("click", ".fb-view-form-btn", function(e) {
 				webFormHelper.viewForm();
 			});
@@ -66,6 +108,7 @@ define([
 			$("body").on("click", ".fb-clear-form-btn", function(e) {
 				webFormHelper.clearForm();
 			});
+			
 			/*
 			 new TabView({
 			 title: "Radios / Checkboxes"
