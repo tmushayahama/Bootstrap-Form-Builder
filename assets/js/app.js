@@ -4,14 +4,14 @@ define([
 			, "views/tab", "views/my-form"
 			, "text!data/input.json", "text!data/combination-input.json", "text!data/radio.json", "text!data/select.json", "text!data/buttons.json"
 			, "text!templates/app/render.html", "text!templates/app/about.html",
-	'ResizeSensor', 'ElementQueries',
+	'ResizeSensor', 'ElementQueries', "jSignature"
 ], function(
 		$, _, Backbone
 		, SnippetsCollection, MyFormSnippetsCollection
 		, TabView, MyFormView
 		, inputJSON, combinationInputJSON, radioJSON, selectJSON, buttonsJSON
 		, renderTab, aboutTab
-		, ResizeSensor, ElementQueries
+		, ResizeSensor, ElementQueries, jSignature
 		) {
 	return {
 		initialize: function() {
@@ -133,28 +133,7 @@ define([
 			 });
 			 */
 
-			var trigger = $('.hamburger'),
-					//overlay = $('.overlay'),
-					isClosed = true;
-
-			trigger.click(function() {
-				hamburger_cross();
-			});
-
-			function hamburger_cross() {
-
-				if (isClosed == true) {
-					//overlay.hide();
-					trigger.removeClass('is-open');
-					trigger.addClass('is-closed');
-					isClosed = false;
-				} else {
-					//overlay.show();
-					trigger.removeClass('is-closed');
-					trigger.addClass('is-open');
-					isClosed = true;
-				}
-			}
+	        $("#signature").jSignature()
 
 			$('[data-toggle="offcanvas"]').click(function() {
 				$('#wrapper').toggleClass('toggled');

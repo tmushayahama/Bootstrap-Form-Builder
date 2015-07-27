@@ -12,13 +12,9 @@ require.config({
       deps: ['jquery'],
       exports: '$.fn.popover'
     },
-	'ResizeSensor': {
+	'jSignature': {
       deps: ['jquery'],
-	  exports: 'ResizeSensor'
-    },
-	'ElementQueries': {
-      deps: ['jquery'],
-	  exports: 'ElementQueries'
+	  exports: 'jSignature'
     }
   }
   , paths: {

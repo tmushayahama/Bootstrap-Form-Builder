@@ -4,6 +4,9 @@ form img {
 }
 
 /*------OVERRIDES------*/
+.form-horizontal .control-label {
+   text-align: left;
+}
 h3 {
 	margin: 0;
 }
@@ -252,7 +255,6 @@ h3 {
 .component-row:not(:first-child) > .component {
 	padding: 15px 10px 15px 10px;
 	border: #c09853 dashed 2px;
-	height: 100%;
 }
 
 input {
