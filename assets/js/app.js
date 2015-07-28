@@ -4,14 +4,14 @@ define([
 			, "views/tab", "views/my-form"
 			, "text!data/input.json", "text!data/combination-input.json", "text!data/radio.json", "text!data/select.json", "text!data/buttons.json"
 			, "text!templates/app/render.html", "text!templates/app/about.html",
-	'ResizeSensor', 'ElementQueries', "jSignature"
+	'ResizeSensor', 'ElementQueries',
 ], function(
 		$, _, Backbone
 		, SnippetsCollection, MyFormSnippetsCollection
 		, TabView, MyFormView
 		, inputJSON, combinationInputJSON, radioJSON, selectJSON, buttonsJSON
 		, renderTab, aboutTab
-		, ResizeSensor, ElementQueries, jSignature
+		, ResizeSensor, ElementQueries
 		) {
 	return {
 		initialize: function() {
@@ -26,88 +26,7 @@ define([
 				title: "Advanced Controls",
 				iconClassName: "fa fa-th-large",
 				collection: new SnippetsCollection(JSON.parse(combinationInputJSON))
-			});
-
-			var WebFormHelper = function(id) {
-				this.id = id;
-			};
-
-			WebFormHelper.prototype.loadForm = function() {
-				console.log("I am being loaded");
-
-				var self = this;
-
-				var request = $.ajax({
-					url: ".../formId/" + self.id,
-					method: "GET",
-					data: {},
-					dataType: "json"
-				});
-
-				request.done(function(data) {
-					$("#target").html(data.Content);
-				});
-
-				request.fail(function(jqXHR, textStatus) {
-					console.log("Form load failed: " + textStatus);
-				});
-
-			};
-
-			WebFormHelper.prototype.saveForm = function() {
-				console.log("I am saved");
-				var self = this;
-				var content = $("#target").html();
-
-				var request = $.ajax({
-					url: ".../formId/" + self.id,
-					method: "POST",
-					data: {Content: content},
-					dataType: "json"
-				});
-
-				request.done(function(data) {
-					$("#info").html("saved");
-				});
-
-				request.fail(function(jqXHR, textStatus) {
-					console.log("Form load failed: " + textStatus);
-				});
-			};
-
-			WebFormHelper.prototype.viewForm = function() {
-				console.log("I am viewed");
-				console.log($("#target").html());
-			};
-
-			WebFormHelper.prototype.publishForm = function() {
-				console.log("I am published");
-			};
-
-			WebFormHelper.prototype.clearForm = function() {
-				console.log("I am cleared");
-			};
-			
-			
-
-			var webFormHelper = new WebFormHelper(1);
-			webFormHelper.loadForm();
-
-			$("body").on("click", ".fb-save-form-btn", function(e) {
-				webFormHelper.saveForm();
-			});
-
-			$("body").on("click", ".fb-view-form-btn", function(e) {
-				webFormHelper.viewForm();
-			});
-
-			$("body").on("click", ".fb-publish-form-btn", function(e) {
-				webFormHelper.publishForm();
-			});
-
-			$("body").on("click", ".fb-clear-form-btn", function(e) {
-				webFormHelper.clearForm();
-			});
+			});			
 			
 			/*
 			 new TabView({
@@ -133,7 +52,6 @@ define([
 			 });
 			 */
 
-	        $("#signature").jSignature()
 
 			$('[data-toggle="offcanvas"]').click(function() {
 				$('#wrapper').toggleClass('toggled');
