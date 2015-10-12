@@ -20,7 +20,11 @@ define([
 			var that = this;
 			//popover
 			$(".popover").remove();
+			
 			this.$el.popover("show");
+			this.$el.popover({
+			    placement: 'top'
+			});
 			$(".popover #save").on("click", this.saveHandler(that));
 			$(".popover #cancel").on("click", this.cancelHandler(that));
 			//add drag event for all but form name

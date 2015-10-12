@@ -5,7 +5,9 @@ define(function(require) {
   , textinput                = require('text!templates/snippet/textinput.html')
   , appendedcheckbox         = require('text!templates/snippet/appendedcheckbox.html')
   , appendedtext             = require('text!templates/snippet/appendedtext.html')
+  , datetimepicker           = require('text!templates/snippet/datetimepicker.html')
   , filebutton               = require('text!templates/snippet/filebutton.html')
+  , imagebox                 = require('text!templates/snippet/imagebox.html')
   , button                   = require('text!templates/snippet/button.html')
   , buttondouble             = require('text!templates/snippet/buttondouble.html')
   , buttondropdown           = require('text!templates/snippet/buttondropdown.html')
@@ -19,9 +21,10 @@ define(function(require) {
   , searchinput              = require('text!templates/snippet/searchinput.html')
   , selectbasic              = require('text!templates/snippet/selectbasic.html')
   , selectmultiple           = require('text!templates/snippet/selectmultiple.html')
+  , signature                = require('text!templates/snippet/signature.html')
   , textarea                 = require('text!templates/snippet/textarea.html')
-   , imagebox                = require('text!templates/snippet/imagebox.html')
-      , whitespace                = require('text!templates/snippet/whitespace.html');;
+  , table                    = require('text!templates/snippet/table.html')
+  , whitespace               = require('text!templates/snippet/whitespace.html');;
 
   return {
     formname                   : formname
@@ -30,6 +33,7 @@ define(function(require) {
     , textinput                : textinput
     , appendedcheckbox         : appendedcheckbox
     , appendedtext             : appendedtext
+    , datetimepicker           : datetimepicker
     , filebutton               : filebutton
     , singlebutton             : button
     , doublebutton             : buttondouble
@@ -43,6 +47,8 @@ define(function(require) {
     , searchinput              : searchinput
     , selectbasic              : selectbasic
     , selectmultiple           : selectmultiple
+    , signature                : signature
+    , table                    : table
     , textarea                 : textarea
     , imagebox                 : imagebox
 	, whitespace			   : whitespace

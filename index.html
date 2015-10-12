@@ -13,7 +13,7 @@
 		<link href="assets/css/lib/bootstrap-3.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
 		<link href="assets/css/font-awesome.min.css" rel="stylesheet">
 		<link id="custom-theme" href="" rel="stylesheet">
-		<link href="assets/css/custom.css?v=2" rel="stylesheet">
+		<link href="assets/css/designer.css" rel="stylesheet">
 		<!--
 		<link href="assets/css/green_screen.css" rel="stylesheet">
 		-->
@@ -30,10 +30,10 @@
 	<body>
 		<div class="fb-header alert alert-info">
 			<div class="container ">
-				<h3>EForm Designer 
+				<h3>EForm Designer
 					<small>Just drag a control to the canvas</small>
 				</h3>
-			</div>		
+			</div>
 		</div>
 		<div class="fb-body">
 			<div class="container">
@@ -57,7 +57,7 @@
 
 				<!-- Page Content -->
 				<div class="fb-right-bar col-lg-8 col-md-8 col-sm-8 col-xs-8 fb-padding-none">
-					<div class="row">					
+					<div class="row">
 						<!-- Tab panes -->
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fb-padding-none">
 							<div class="well row">
@@ -73,8 +73,8 @@
 							<div id="build" class="">
 								<form id="target" class="form-horizontal">
 								</form>
-								<div id="signature"></div>		
-							</div>						
+								<div id="signature"></div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -86,107 +86,107 @@
 		<div class="fb-footer">
 			<div class="container ">
 				About EForms
-			</div>		
+			</div>
 		</div>
 		<script type="text/javascript">
-			require.config({
-				paths: {
-					"jquery": "lib/jquery"
-				}
-			});
-			define("FormBuilderDesigner", ["jquery", "lib/underscore", "lib/backbone"],
-					function($, _, Backbone) {
-						return {
-							init: function() {
-								$("p")
-								var WebFormHelper = function(id) {
-									this.id = id;
-								};
+   require.config({
+    paths: {
+     "jquery": "lib/jquery"
+    }
+   });
+   define("FormBuilderDesigner", ["jquery", "lib/underscore", "lib/backbone"],
+           function ($, _, Backbone) {
+            return {
+             init: function () {
+              $("p")
+              var WebFormHelper = function (id) {
+               this.id = id;
+              };
 
-								WebFormHelper.prototype.loadForm = function() {
-									console.log("I am being loaded");
+              WebFormHelper.prototype.loadForm = function () {
+               console.log("I am being loaded");
 
-									var self = this;
+               var self = this;
 
-									var request = $.ajax({
-										url: ".../formId/" + self.id,
-										method: "GET",
-										data: {},
-										dataType: "json"
-									});
+               var request = $.ajax({
+                url: ".../formId/" + self.id,
+                method: "GET",
+                data: {},
+                dataType: "json"
+               });
 
-									request.done(function(data) {
-										$("#target").html(data.Content);
-									});
+               request.done(function (data) {
+                $("#target").html(data.Content);
+               });
 
-									request.fail(function(jqXHR, textStatus) {
-										console.log("Form load failed: " + textStatus);
-									});
+               request.fail(function (jqXHR, textStatus) {
+                console.log("Form load failed: " + textStatus);
+               });
 
-								};
+              };
 
-								WebFormHelper.prototype.saveForm = function() {
-									console.log("I am saved");
-									var self = this;
-									var content = $("#target").html();
+              WebFormHelper.prototype.saveForm = function () {
+               console.log("I am saved");
+               var self = this;
+               var content = $("#target").html();
 
-									var request = $.ajax({
-										url: ".../formId/" + self.id,
-										method: "POST",
-										data: {Content: content},
-										dataType: "json"
-									});
+               var request = $.ajax({
+                url: ".../formId/" + self.id,
+                method: "POST",
+                data: {Content: content},
+                dataType: "json"
+               });
 
-									request.done(function(data) {
-										$("#info").html("saved");
-									});
+               request.done(function (data) {
+                $("#info").html("saved");
+               });
 
-									request.fail(function(jqXHR, textStatus) {
-										console.log("Form load failed: " + textStatus);
-									});
-								};
+               request.fail(function (jqXHR, textStatus) {
+                console.log("Form load failed: " + textStatus);
+               });
+              };
 
-								WebFormHelper.prototype.viewForm = function() {
-									console.log("I am viewed");
-									console.log($("#target").html());
-								};
+              WebFormHelper.prototype.viewForm = function () {
+               console.log("I am viewed");
+               console.log($("#target").html());
+              };
 
-								WebFormHelper.prototype.publishForm = function() {
-									console.log("I am published");
-								};
+              WebFormHelper.prototype.publishForm = function () {
+               console.log("I am published");
+              };
 
-								WebFormHelper.prototype.clearForm = function() {
-									console.log("I am cleared");
-								};
+              WebFormHelper.prototype.clearForm = function () {
+               console.log("I am cleared");
+              };
 
 
 
-								var webFormHelper = new WebFormHelper(1);
-								webFormHelper.loadForm();
+              var webFormHelper = new WebFormHelper(1);
+              //webFormHelper.loadForm();
 
-								$("body").on("click", ".fb-save-form-btn", function(e) {
-									webFormHelper.saveForm();
-								});
+              $("body").on("click", ".fb-save-form-btn", function (e) {
+               webFormHelper.saveForm();
+              });
 
-								$("body").on("click", ".fb-view-form-btn", function(e) {
-									webFormHelper.viewForm();
-								});
+              $("body").on("click", ".fb-view-form-btn", function (e) {
+               webFormHelper.viewForm();
+              });
 
-								$("body").on("click", ".fb-publish-form-btn", function(e) {
-									webFormHelper.publishForm();
-								});
+              $("body").on("click", ".fb-publish-form-btn", function (e) {
+               webFormHelper.publishForm();
+              });
 
-								$("body").on("click", ".fb-clear-form-btn", function(e) {
-									webFormHelper.clearForm();
-								});
-							}
-							//init();
-						};
-					}
-			);
-			require(['FormBuilderDesigner'], function(formBuilderDesigner) {
-				formBuilderDesigner.init();
-			});
+              $("body").on("click", ".fb-clear-form-btn", function (e) {
+               webFormHelper.clearForm();
+              });
+             }
+             //init();
+            };
+           }
+   );
+   require(['FormBuilderDesigner'], function (formBuilderDesigner) {
+    formBuilderDesigner.init();
+   });
 		</script>
 	</body>
 </html>

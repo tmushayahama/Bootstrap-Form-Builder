@@ -1,0 +1,579 @@
+
+form img {
+	max-height: 100px;
+}
+
+.fb-signature {
+    height: 50px;
+}
+
+.fb-signature img {
+    width: 100%;
+}
+
+/*------OVERRIDES------*/
+.form-horizontal .control-label {
+   text-align: left;
+}
+h3 {
+	margin: 0;
+}
+.row {
+	margin-left: 0;
+	margin-right: 0;
+}
+.form-horizontal .form-group {
+	margin: 0;
+}
+.form-horizontal .control-label {
+	padding-top: 0;
+	padding-right: 0;
+	font-weight: normal;
+}
+
+/*------FB TOOLS------*/
+.fb-hide {
+	display: none;
+}
+.fb-padding-none {
+	padding: 0!important;
+}
+.fb-truncate {
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.fb-disabled {
+	opacity: .5;
+    pointer-events: none;
+}
+.fb-coming-soon {
+	position: absolute;	
+	top: 30px;
+	right: 0;
+	bottom: 0;
+	color:  #fc4c5e; 
+	font-size: 1.5em;
+	z-index: 1000;
+	-webkit-transform: rotate(48deg);
+	-moz-transform: rotate(48deg);
+	-o-transform: rotate(48deg);
+	writing-mode: lr-tb;
+}
+
+.tab-nav-container {
+	border-bottom: 2px solid #C8C8C6;
+}
+.fb-header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 62px;
+}
+
+.fb-body {
+	position: absolute;
+	top: 65px;
+	left: 0;
+	right: 0;
+	bottom: 50px;
+}
+.fb-footer {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 50px;
+	background-color: #EEE;
+}
+.fb-modal-lg .modal-content {
+    width: 800px;
+}
+.fb-modal-lg .fb-preview-form {
+    max-height: 600px;
+    overflow-y: auto; 
+}
+.fb-body .container {
+	height: 100%;
+}
+.fb-body .fb-left-bar,
+.fb-body .fb-right-bar{
+	padding-bottom: 200px; /*so that the last element when srolled to the bottom*/	
+	height: 100%;
+	overflow-y: auto;
+}
+.fb-body .fb-right-bar {
+	background-color: #F2F2F2;
+}
+
+.fb-nav-tabs-1 {
+	position: relative;
+	margin-top: 10px;
+}
+
+.fb-nav-tabs-1 > li {
+	padding: 0 0 0 3px;
+	border: none;
+	margin-bottom: -1px;
+}
+
+.fb-nav-tabs-1 > li > a {
+	width: 100%;
+	margin: 0;
+	margin-left: 3px;
+	border-radius: 7px 7px 0 0;
+	border: #C8C8C6 solid 2px;
+	line-height: 1.3em;
+	color: #222;
+	font-size: 1.2em;
+}
+
+.fb-nav-tabs-1 > li > a:hover {
+	border-color: transparent;
+	color: #000;
+	background-color: transparent;
+}
+
+.fb-nav-tabs-1 > li.active > a,
+.fb-nav-tabs-1 > li.active > a:hover,
+.fb-nav-tabs-1 > li.active > a:focus {
+	color: #EEE;
+	cursor: default;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	background-color: #c09853;
+	border-bottom-color: transparent;
+}
+
+.fb-nav-tabs-2 {
+	position: relative;
+}
+
+.fb-nav-tabs-2 .fb-heading {
+	padding: 15px 0 0 30px;
+	font-size: 1.3em;	
+}
+
+.fb-nav-tabs-2 li {
+	text-align: center;
+	padding: 0 0 0 3px;
+	border: #74AFAD solid 1px;
+	margin-bottom: -1px;
+}
+
+.fb-nav-tabs-2 li > a {
+	height: 50px;
+	width: 100%;
+	margin: 0;
+	color: #222;
+	font-size: 0.9em;
+}
+
+.fb-nav-tabs-2 li > a:hover {
+	color: #000;
+	background-color: #80C1BF;
+}
+
+.fb-nav-tabs-2 li.active > a,
+.fb-nav-tabs-2 li.active > a:hover,
+.fb-nav-tabs-2 li.active > a:focus {
+	background-color: #74AFAD;
+	cursor: default;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	color: #EEE;
+	border-bottom-color: transparent;
+}
+
+.fb-desktop-template {
+	position: relative;
+}
+
+.fb-desktop-template .fb-img-template {
+	opacity: 0.2;
+	position:absolute;
+	width: 100%;
+	left:0;
+	right: 0;
+	top:0;
+	bottom: 0;
+}
+
+.fb-desktop-template .fb-template-inner {
+	padding: 60px 80px 0 80px;
+	height: 710px;
+}
+
+.fb-tablet-template {
+	position: relative;
+	padding: 35px 35px 200px 35px;
+}
+
+.fb-tablet-template .fb-img-template {
+	opacity: 0.2;
+	position:absolute;
+	width: 100%;
+	left:0;
+	right: 0;
+	top:0;
+	bottom: 0;
+}
+
+.fb-tablet-template .fb-template-inner {
+	padding: 20px;
+	height: 300px;
+}
+
+.fb-phone-template {
+	position: relative;
+	padding: 35px 35px 200px 35px;
+}
+
+.fb-phone-template .fb-img-template {
+	opacity: 0.2;
+	position:absolute;
+	width: 100%;
+	left:0;
+	right: 0;
+	top:0;
+	bottom: 0;
+}
+
+.fb-phone-template .fb-template-inner {
+	padding: 20px;
+	height: 450px;
+}
+
+#components {
+	min-height: 500px;
+}
+
+#target fieldset {
+	width: 100%;
+	border: none;
+	padding: 5px;
+	padding-bottom: 200px;
+}
+.component-row {
+	padding: 0px;
+}
+
+.component {
+	position: relative;
+	cursor: pointer;
+}
+.component-row:not(:first-child) > .component {
+	padding: 15px 10px 15px 10px;
+}
+#build .component-row:not(:first-child) > .component {
+	padding: 15px 10px 15px 10px;
+	border: #c09853 dashed 2px;
+}
+
+input {
+	cursor: pointer;
+}
+
+textarea {
+	resize: vertical;
+}
+
+.popover .control-group {
+	cursor: default;
+}
+.popover input {
+	cursor: text;
+}
+
+.temp{
+	width: 100%;
+	height: 100%;
+	background: transparent;
+	position: absolute;
+	z-index: 999;
+	top: 0;
+	overflow-x: hidden;
+	left: 0;
+}
+
+
+.temp form {
+	width: 300px;
+	opacity: 0.5;
+	padding: 8px 0px;
+	border: 1px dotted #ccc;
+	position: absolute;
+	background: white;
+	box-shadow: 0px 0px 30px #999;
+	-webkit-transition: -webkit-transform 0.1s ease-out;
+	overflow: hidden;
+}
+
+
+#render{
+	min-height: 500px;
+	font-family: monospace;
+}
+
+/* Popovers now are appended to their parent rather
+than to the body/main document as they once were.
+We need to over-ride some inherited stuff.. */
+form .popover .controls {
+	margin-left: 0;
+}
+
+form .popover .control-label {
+	text-align: left;
+}
+
+form .popover form {
+	width: 224px;
+}
+
+.popover-content form .btn{
+	margin-right: 10px
+}
+
+.target{
+	background: #c09853;
+}
+
+#target, #input, #radioscheckboxes, #select, #buttons {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+
+
+.nav>li>a {
+	padding: 8px 13px;
+}
+
+.popover {
+	z-index: 2000;
+}
+
+
+.required-control .control-label:after {
+	content: " *";
+	color: #fc4c5e;
+}
+
+
+body {
+	background-color: #FFF;
+	position: relative;
+	overflow-x: hidden;
+}
+body,
+html { height: 100%;}
+.nav .open > a,
+.nav .open > a:hover,
+.nav .open > a:focus {background-color: transparent;}
+
+
+/*-------------------------------*/
+/*     Sidebar nav styles        */
+/*-------------------------------*/
+
+.sidebar-nav {
+	list-style: none;
+}
+
+.sidebar-nav li {
+	position: relative;
+	margin-bottom: 10px;
+	padding: 0px;
+	border: #c09853 dashed 1px;
+	display: inline-block;
+	width: 100%;
+}
+.sidebar-nav li .component {
+	position: relative;
+	padding: 10px 0px;
+	display: inline-block;
+	width: 100%;
+}
+
+.sidebar-nav li:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	height: 100%;
+	width: 0px;
+	background-color: #1c1c1c;
+	-webkit-transition: width .2s ease-in;
+	-moz-transition:  width .2s ease-in;
+	-ms-transition:  width .2s ease-in;
+	transition: width .2s ease-in;
+
+}
+.sidebar-nav li:before {
+	background-color: #D1D1CF;
+}
+.sidebar-nav li:hover:before,
+.sidebar-nav li.open:hover:before {
+	width: 100%;
+	-webkit-transition: width .2s ease-in;
+	-moz-transition:  width .2s ease-in;
+	-ms-transition:  width .2s ease-in;
+	transition: width .2s ease-in;
+
+}
+
+.sidebar-nav li a {
+	display: block;
+	color: #ddd;
+	text-decoration: none;
+	padding: 10px 15px 10px 30px;
+}
+
+.sidebar-nav li a:hover,
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus,
+.sidebar-nav li.open a:hover,
+.sidebar-nav li.open a:active,
+.sidebar-nav li.open a:focus{
+	color: #fff;
+	text-decoration: none;
+	background-color: transparent;
+}
+
+.sidebar-nav > .sidebar-brand {
+	height: 65px;
+	font-size: 20px;
+	line-height: 44px;
+}
+.sidebar-nav .dropdown-menu {
+	position: relative;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border-radius: 0;
+	border: none;
+	background-color: #222;
+	box-shadow: none;
+}
+
+/*-------------------------------*/
+/*       Hamburger-Cross         */
+/*-------------------------------*/
+
+.hamburger {
+	position: fixed;
+	top: 5px;
+	z-index: 999;
+	display: block;
+	width: 32px;
+	height: 32px;
+	margin-left: 15px;
+	background: transparent;
+	border: none;
+}
+.hamburger:hover,
+.hamburger:focus,
+.hamburger:active {
+	outline: none;
+}
+.hamburger.is-closed:before {
+	content: '';
+	display: block;
+	width: 100px;
+	font-size: 14px;
+	color: #fff;
+	line-height: 32px;
+	text-align: center;
+	opacity: 0;
+	-webkit-transform: translate3d(0,0,0);
+	-webkit-transition: all .35s ease-in-out;
+}
+.hamburger.is-closed:hover:before {
+	opacity: 1;
+	display: block;
+	-webkit-transform: translate3d(-100px,0,0);
+	-webkit-transition: all .35s ease-in-out;
+}
+
+.hamburger.is-closed .hamb-top,
+.hamburger.is-closed .hamb-middle,
+.hamburger.is-closed .hamb-bottom,
+.hamburger.is-open .hamb-top,
+.hamburger.is-open .hamb-middle,
+.hamburger.is-open .hamb-bottom {
+	position: absolute;
+	left: 0;
+	height: 4px;
+	width: 100%;
+}
+.hamburger.is-closed .hamb-top,
+.hamburger.is-closed .hamb-middle,
+.hamburger.is-closed .hamb-bottom {
+	background-color: #1a1a1a;
+}
+.hamburger.is-closed .hamb-top {
+	top: 5px;
+	-webkit-transition: all .35s ease-in-out;
+}
+.hamburger.is-closed .hamb-middle {
+	top: 50%;
+	margin-top: -2px;
+}
+.hamburger.is-closed .hamb-bottom {
+	bottom: 5px;
+	-webkit-transition: all .35s ease-in-out;
+}
+
+.hamburger.is-closed:hover .hamb-top {
+	top: 0;
+	-webkit-transition: all .35s ease-in-out;
+}
+.hamburger.is-closed:hover .hamb-bottom {
+	bottom: 0;
+	-webkit-transition: all .35s ease-in-out;
+}
+.hamburger.is-open .hamb-top,
+.hamburger.is-open .hamb-middle,
+.hamburger.is-open .hamb-bottom {
+	background-color: #1a1a1a;
+}
+.hamburger.is-open .hamb-top,
+.hamburger.is-open .hamb-bottom {
+	top: 50%;
+	margin-top: -2px;
+}
+.hamburger.is-open .hamb-top {
+	-webkit-transform: rotate(45deg);
+	-webkit-transition: -webkit-transform .2s cubic-bezier(.73,1,.28,.08);
+}
+.hamburger.is-open .hamb-middle { display: none; }
+.hamburger.is-open .hamb-bottom {
+	-webkit-transform: rotate(-45deg);
+	-webkit-transition: -webkit-transform .2s cubic-bezier(.73,1,.28,.08);
+}
+.hamburger.is-open:before {
+	content: '';
+	display: block;
+	width: 100px;
+	font-size: 14px;
+	color: #fff;
+	line-height: 32px;
+	text-align: center;
+	opacity: 0;
+	-webkit-transform: translate3d(0,0,0);
+	-webkit-transition: all .35s ease-in-out;
+}
+.hamburger.is-open:hover:before {
+	opacity: 1;
+	display: block;
+	-webkit-transform: translate3d(-100px,0,0);
+	-webkit-transition: all .35s ease-in-out;
+}

@@ -61,7 +61,10 @@ define([
 			this.wrapRooms();
 			this.$el.appendTo("#build form");
 
-
+			var status = $(".fb-save-form-btn .fb-status");
+			status.removeClass("text-success");
+			status.addClass("text-danger");
+			status.text("Not Saved");
 			//this.prettifyComponentRows();
 			this.delegateEvents();
 		}
@@ -80,9 +83,15 @@ define([
 					return e.html();
 				}).join("\n")
 			}));
+			FORM_JSON = JSON.stringify(this.prepareCollectionJson());
 
 			this.wrapRooms();
 			this.$el.appendTo("#build form");
+
+			var status = $(".fb-save-form-btn .fb-status");
+			status.removeClass("text-success");
+			status.addClass("text-danger");
+			status.text("Not Saved");
 			this.delegateEvents();
 		}
 
@@ -107,6 +116,10 @@ define([
 			this.wrapRooms();
 			this.$el.appendTo("#build form");
 
+			var status = $(".fb-save-form-btn .fb-status");
+			status.removeClass("text-success");
+			status.addClass("text-danger");
+			status.text("Not Saved");
 			//this.prettifyComponentRows();
 			this.delegateEvents();
 		}
@@ -173,6 +186,11 @@ define([
 				thisModel.collection.models[i].set("className", $child.attr("class"));
 			}
 		}
+
+        , prepareCollectionJson: function () {
+            var thisModel = this;
+            return thisModel.collection.toJSON();
+        }
 
 		, prettifyComponentRows: function() {
 			var thisModel = this;

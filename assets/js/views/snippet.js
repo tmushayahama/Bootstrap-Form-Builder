@@ -57,6 +57,7 @@ define([
 						).attr({
 					"class": this.className
 					, "data-content": content
+                    , "data-placement": "bottom"
 					, "data-title": that.model.get("title")
 					, "data-trigger": "manual"
 					, "data-html": true
